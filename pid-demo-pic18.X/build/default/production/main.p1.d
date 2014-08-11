@@ -3,4 +3,8 @@
  main.c  \
 ../PID.h  \
 ../Tick/TickPort.h  \
-../Tick/Tick.h 
+io.h  \
+../SPI/SPIPort.h  \
+tc.h  \
+../Tick/Tick.h  \
+../SPI/SPI.h 

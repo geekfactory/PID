@@ -45,11 +45,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/_ext/1376266981/Tick-PIC18.p1 ${OBJECTDIR}/_ext/838288359/PID.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/_ext/1376266981/Tick-PIC18.p1.d ${OBJECTDIR}/_ext/838288359/PID.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/_ext/1376266981/Tick-PIC18.p1 ${OBJECTDIR}/_ext/838288359/PID.p1 ${OBJECTDIR}/tc.p1 ${OBJECTDIR}/io.p1 ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/_ext/1376266981/Tick-PIC18.p1.d ${OBJECTDIR}/_ext/838288359/PID.p1.d ${OBJECTDIR}/tc.p1.d ${OBJECTDIR}/io.p1.d ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/_ext/1376266981/Tick-PIC18.p1 ${OBJECTDIR}/_ext/838288359/PID.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/_ext/1376266981/Tick-PIC18.p1 ${OBJECTDIR}/_ext/838288359/PID.p1 ${OBJECTDIR}/tc.p1 ${OBJECTDIR}/io.p1 ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1
 
 
 CFLAGS=
@@ -93,6 +93,27 @@ ${OBJECTDIR}/_ext/838288359/PID.p1: C:/Users/Ruben/Dropbox/Electronics/MCULib/PI
 	@-${MV} ${OBJECTDIR}/_ext/838288359/PID.d ${OBJECTDIR}/_ext/838288359/PID.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/838288359/PID.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/tc.p1: tc.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/tc.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/tc.p1  tc.c 
+	@-${MV} ${OBJECTDIR}/tc.d ${OBJECTDIR}/tc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/tc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/io.p1: io.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/io.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/io.p1  io.c 
+	@-${MV} ${OBJECTDIR}/io.d ${OBJECTDIR}/io.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/io.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1: C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/460035940 
+	@${RM} ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1  C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c 
+	@-${MV} ${OBJECTDIR}/_ext/460035940/SPI-PIC16.d ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -114,6 +135,27 @@ ${OBJECTDIR}/_ext/838288359/PID.p1: C:/Users/Ruben/Dropbox/Electronics/MCULib/PI
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/_ext/838288359/PID.p1  C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c 
 	@-${MV} ${OBJECTDIR}/_ext/838288359/PID.d ${OBJECTDIR}/_ext/838288359/PID.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/838288359/PID.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/tc.p1: tc.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/tc.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/tc.p1  tc.c 
+	@-${MV} ${OBJECTDIR}/tc.d ${OBJECTDIR}/tc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/tc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/io.p1: io.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/io.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/io.p1  io.c 
+	@-${MV} ${OBJECTDIR}/io.d ${OBJECTDIR}/io.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/io.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1: C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/460035940 
+	@${RM} ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,-asmfile,+speed,-space,-debug,9 --addrqual=ignore --mode=free -DPLIB_PIC18 -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1  C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c 
+	@-${MV} ${OBJECTDIR}/_ext/460035940/SPI-PIC16.d ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/460035940/SPI-PIC16.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

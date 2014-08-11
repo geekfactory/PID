@@ -1,31 +1,66 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[c E4687 0 1 .. ]
-[n E4687 enCtrlDirs E_PID_DIRECT E_PID_REVERSE  ]
-[s S518 `*f 1 `*f 1 `*f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `ul 1 `ul 1 `uc 1 `E4687 1 ]
-[n S518 pid_controller input output setpoint Kp Ki Kd omin omax iterm lastin lasttime sampletime automode direction ]
-[s S519 `uc 1 `uc 1 ]
-[n S519 thermocuple_struct spi cspin ]
-[p mainexit ]
-[c E4734 1 2 3 4 .. ]
-[n E4734 enSPIModules E_SPI_1 E_SPI_2 E_SPI_3 E_SPI_4  ]
-"90 ../SPI/SPI.h
-[v _spi_init `(uc ~T0 @X0 0 ef1`E4734 ]
-"103
+[c E4685 1 2 3 4 .. ]
+[n E4685 enSPIModules E_SPI_1 E_SPI_2 E_SPI_3 E_SPI_4  ]
+"6282 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
+[v _SSPSTAT `Vuc ~T0 @X0 0 e@4039 ]
+"6213
+[v _SSPCON1 `Vuc ~T0 @X0 0 e@4038 ]
+"103 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h
 [v _spi_control `(uc ~T0 @X0 0 ef3`uc`ul`ul ]
-"58 tc.h
-[v _tc_init `(S519 ~T0 @X0 0 ef2`uc`uc ]
-"86 ../PID.h
-[v _pid_create `(*S518 ~T0 @X0 0 ef7`*S518`*f`*f`*f`f`f`f ]
-"95
-[v _pid_limits `(v ~T0 @X0 0 ef3`*S518`f`f ]
-"99
-[v _pid_auto `(v ~T0 @X0 0 ef1`*S518 ]
-"63 ../Tick/Tick.h
-[v _tick_get `(ul ~T0 @X0 0 ef ]
-"82 tc.h
-[v _tc_read_float `(f ~T0 @X0 0 ef1`*S519 ]
-"89 ../PID.h
-[v _pid_compute `(uc ~T0 @X0 0 ef1`*S518 ]
+[s S399 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S399 . SSPM CKP SSPEN SSPOV WCOL ]
+[s S400 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S400 . SSPM0 SSPM1 SSPM2 SSPM3 ]
+[u S398 `S399 1 `S400 1 ]
+[n S398 . . . ]
+"6233 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
+[v _SSPCON1bits `VS398 ~T0 @X0 0 e@4038 ]
+[s S402 :2 `uc 1 :1 `uc 1 ]
+[n S402 . . R_NOT_W ]
+[s S403 :5 `uc 1 :1 `uc 1 ]
+[n S403 . . D_NOT_A ]
+[s S404 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S404 . BF UA R_nW S P D_nA CKE SMP ]
+[s S405 :2 `uc 1 :1 `uc 1 ]
+[n S405 . . R_NOT_W ]
+[s S406 :5 `uc 1 :1 `uc 1 ]
+[n S406 . . D_NOT_A ]
+[s S407 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S407 . . R_W . D_A ]
+[s S408 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S408 . . I2C_READ I2C_START I2C_STOP I2C_DAT ]
+[s S409 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S409 . . nW . nA ]
+[s S410 :2 `uc 1 :1 `uc 1 ]
+[n S410 . . NOT_WRITE ]
+[s S411 :5 `uc 1 :1 `uc 1 ]
+[n S411 . . NOT_ADDRESS ]
+[s S412 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S412 . . nWRITE . nADDRESS ]
+[s S413 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S413 . . READ_WRITE . DATA_ADDRESS ]
+[s S414 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S414 . . R . D ]
+[s S415 :5 `uc 1 :1 `uc 1 ]
+[n S415 . . DA ]
+[s S416 :2 `uc 1 :1 `uc 1 ]
+[n S416 . . RW ]
+[s S417 :3 `uc 1 :1 `uc 1 ]
+[n S417 . . START ]
+[s S418 :4 `uc 1 :1 `uc 1 ]
+[n S418 . . STOP ]
+[s S419 :2 `uc 1 :1 `uc 1 ]
+[n S419 . . NOT_W ]
+[s S420 :5 `uc 1 :1 `uc 1 ]
+[n S420 . . NOT_A ]
+[u S401 `S402 1 `S403 1 `S404 1 `S405 1 `S406 1 `S407 1 `S408 1 `S409 1 `S410 1 `S411 1 `S412 1 `S413 1 `S414 1 `S415 1 `S416 1 `S417 1 `S418 1 `S419 1 `S420 1 ]
+[n S401 . . . . . . . . . . . . . . . . . . . . ]
+"6384
+[v _SSPSTATbits `VS401 ~T0 @X0 0 e@4039 ]
+"6554
+[v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
+"24 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _spi_available `(uc ~T0 @X0 0 sf1`uc ]
 [; ;pic18f2550.h: 44: extern volatile unsigned short UFRM @ 0xF66;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
 [; ;pic18f2550.h: 46: asm("UFRM equ 0F66h");
@@ -4335,37 +4370,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;Tick.h: 51: void tick_init();
-[; ;Tick.h: 63: uint32_t tick_get();
-[; ;Tick.h: 72: void tick_update();
-[; ;PID.h: 37: enum enCtrlDirs {
-[; ;PID.h: 38: E_PID_DIRECT,
-[; ;PID.h: 39: E_PID_REVERSE,
-[; ;PID.h: 40: };
-[; ;PID.h: 42: struct pid_controller {
-[; ;PID.h: 44: float * input;
-[; ;PID.h: 45: float * output;
-[; ;PID.h: 46: float * setpoint;
-[; ;PID.h: 48: float Kp;
-[; ;PID.h: 49: float Ki;
-[; ;PID.h: 50: float Kd;
-[; ;PID.h: 52: float omin;
-[; ;PID.h: 53: float omax;
-[; ;PID.h: 55: float iterm;
-[; ;PID.h: 56: float lastin;
-[; ;PID.h: 58: uint32_t lasttime;
-[; ;PID.h: 59: uint32_t sampletime;
-[; ;PID.h: 61: uint8_t automode;
-[; ;PID.h: 62: enum enCtrlDirs direction;
-[; ;PID.h: 63: };
-[; ;PID.h: 65: typedef struct pid_controller * pid_t;
-[; ;PID.h: 86: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
-[; ;PID.h: 89: uint8_t pid_compute(pid_t pid);
-[; ;PID.h: 91: void pid_tune(pid_t pid, float kp, float ki, float kd);
-[; ;PID.h: 93: void pid_sample(pid_t pid, uint32_t time);
-[; ;PID.h: 95: void pid_limits(pid_t pid, float min, float max);
-[; ;PID.h: 97: void pid_direction(pid_t pid, enum enCtrlDirs direction);
-[; ;PID.h: 99: void pid_auto(pid_t pid);
 [; ;SPIPort.h: 18: typedef char xSPIHandle;
 [; ;SPI.h: 62: enum enSPIModules {
 [; ;SPI.h: 63: E_SPI_1 = 1,
@@ -4383,176 +4387,492 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SPI.h: 163: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
 [; ;SPI.h: 173: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
 [; ;SPI.h: 183: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
-[; ;io.h: 6: void io_write(uint8_t pin, uint8_t value);
-[; ;io.h: 8: void io_mode(uint8_t pin, uint8_t mode);
-[; ;tc.h: 37: struct thermocuple_struct
-[; ;tc.h: 38: {
-[; ;tc.h: 39: xSPIHandle spi;
-[; ;tc.h: 40: uint8_t cspin;
-[; ;tc.h: 41: };
-[; ;tc.h: 43: typedef struct thermocuple_struct tc_t;
-[; ;tc.h: 58: tc_t tc_init(xSPIHandle spid, uint8_t cspin);
-[; ;tc.h: 70: int16_t tc_read(tc_t * tcpl);
-[; ;tc.h: 82: float tc_read_float(tc_t * tcpl);
-"6 main.c
-[p x PLLDIV=1 ]
-"7
-[p x CPUDIV=OSC1_PLL2 ]
-"8
-[p x USBDIV=1 ]
-"11
-[p x FOSC=EC_EC ]
-"12
-[p x FCMEN=OFF ]
-"13
-[p x IESO=OFF ]
-"16
-[p x PWRT=OFF ]
-"17
-[p x BOR=ON ]
-"18
-[p x BORV=3 ]
-"19
-[p x VREGEN=OFF ]
-"22
-[p x WDT=ON ]
-"23
-[p x WDTPS=32768 ]
-"26
-[p x CCP2MX=ON ]
+"22 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _inuse `uc ~T0 @X0 1 s ]
+[i _inuse
+-> -> 0 `i `uc
+]
+[; ;SPI-PIC16.c: 22: static uint8_t inuse = 0;
+[; ;SPI-PIC16.c: 24: static uint8_t spi_available( xSPIHandle spid );
 "27
-[p x PBADEN=ON ]
-"28
-[p x LPT1OSC=OFF ]
-"29
-[p x MCLRE=ON ]
-"32
-[p x STVREN=ON ]
-"33
-[p x LVP=ON ]
-"34
-[p x XINST=OFF ]
-"37
-[p x CP0=OFF ]
-"38
-[p x CP1=OFF ]
-"39
-[p x CP2=OFF ]
-"40
-[p x CP3=OFF ]
-"43
-[p x CPB=OFF ]
-"44
-[p x CPD=OFF ]
-"47
-[p x WRT0=OFF ]
-"48
-[p x WRT1=OFF ]
-"49
-[p x WRT2=OFF ]
-"50
-[p x WRT3=OFF ]
-"53
-[p x WRTC=OFF ]
-"54
-[p x WRTB=OFF ]
-"55
-[p x WRTD=OFF ]
-"58
-[p x EBTR0=OFF ]
-"59
-[p x EBTR1=OFF ]
-"60
-[p x EBTR2=OFF ]
-"61
-[p x EBTR3=OFF ]
-"64
-[p x EBTRB=OFF ]
-"69
-[v _lastrun `ul ~T0 @X0 1 e ]
-[i _lastrun
--> -> -> 0 `i `l `ul
-]
-[; ;main.c: 69: uint32_t lastrun = 0;
-"71
-[v _in `f ~T0 @X0 1 e ]
-[v _out `f ~T0 @X0 1 e ]
-[v _set `f ~T0 @X0 1 e ]
-[i _set
--> -> 100 `i `f
-]
-[; ;main.c: 71: float in, out, set = 100;
-"73
-[v _pidctrl `S518 ~T0 @X0 1 e ]
-[; ;main.c: 73: struct pid_controller pidctrl;
-"74
-[v _pid `*S518 ~T0 @X0 1 e ]
-[i _pid
--> -> 0 `i `*S518
-]
-[; ;main.c: 74: pid_t pid = 0;
-"76
-[v _spi `uc ~T0 @X0 1 e ]
-[; ;main.c: 76: xSPIHandle spi;
-"78
-[v _sensor `S519 ~T0 @X0 1 e ]
-[; ;main.c: 78: tc_t sensor;
-"81
-[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
+[v _spi_init `(uc ~T0 @X0 1 ef1`E4685 ]
 {
-[; ;main.c: 80: int main(int argc, char** argv)
-[; ;main.c: 81: {
-[e :U _main ]
-[v _argc `i ~T0 @X0 1 r1 ]
-[v _argv `**uc ~T0 @X0 1 r2 ]
+[; ;SPI-PIC16.c: 26: xSPIHandle spi_init( enum enSPIModules eModule )
+[; ;SPI-PIC16.c: 27: {
+[e :U _spi_init ]
+[v _eModule `E4685 ~T0 @X0 1 r1 ]
 [f ]
-[; ;main.c: 82: spi = spi_init(E_SPI_1);
-"82
-[e = _spi ( _spi_init (1 -> . `E4734 0 `E4734 ]
-[; ;main.c: 83: spi_control(spi, 0x00000001 | 0x00000010, 7);
-"83
-[e ( _spi_control (3 , , _spi -> -> | -> 1 `i -> 16 `i `l `ul -> -> -> 7 `i `l `ul ]
-[; ;main.c: 86: sensor = tc_init(spi, 1);
-"86
-[e = _sensor ( _tc_init (2 , _spi -> -> 1 `i `uc ]
-[; ;main.c: 89: pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
-"89
-[e = _pid ( _pid_create (4 , , , , , , &U _pidctrl &U _in &U _out &U _set -> -> 5 `i `f -> -> 1 `i `f -> -> 3 `i `f ]
-[; ;main.c: 91: pid_limits(pid, 0, 255);
-"91
-[e ( _pid_limits (3 , , _pid -> -> 0 `i `f -> -> 255 `i `f ]
-[; ;main.c: 93: pid_auto(pid);
-"93
-[e ( _pid_auto (1 _pid ]
-[; ;main.c: 95: for (;;) {
-"95
+[; ;SPI-PIC16.c: 28: if( eModule != 1 )
+"28
+[e $ ! != -> _eModule `i -> 1 `i 519  ]
+[; ;SPI-PIC16.c: 29: return 0;
+"29
+[e ) -> -> 0 `i `uc ]
+[e $UE 518  ]
+[e :U 519 ]
+[; ;SPI-PIC16.c: 31: SSPSTAT = 0x00;
+"31
+[e = _SSPSTAT -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 32: SSPCON1 = 0x00;
+"32
+[e = _SSPCON1 -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 35: spi_control( eModule, 0x00000001 | 0x00000010, 3 );
+"35
+[e ( _spi_control (3 , , -> _eModule `uc -> -> | -> 1 `i -> 16 `i `l `ul -> -> -> 3 `i `l `ul ]
+[; ;SPI-PIC16.c: 38: return eModule;
+"38
+[e ) -> _eModule `uc ]
+[e $UE 518  ]
+[; ;SPI-PIC16.c: 39: }
+"39
+[e :UE 518 ]
+}
+"42
+[v _spi_control `(uc ~T0 @X0 1 ef3`uc`ul`ul ]
 {
+[; ;SPI-PIC16.c: 41: uint8_t spi_control( xSPIHandle spid, uint32_t ctrl, uint32_t arg )
+[; ;SPI-PIC16.c: 42: {
+[e :U _spi_control ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[v _ctrl `ul ~T0 @X0 1 r2 ]
+[v _arg `ul ~T0 @X0 1 r3 ]
+[f ]
+[; ;SPI-PIC16.c: 44: if( spid != 1 )
+"44
+[e $ ! != -> _spid `i -> 1 `i 521  ]
+[; ;SPI-PIC16.c: 45: return -1;
+"45
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 520  ]
 [e :U 521 ]
+"47
+[v _speed `uc ~T0 @X0 1 a ]
+[; ;SPI-PIC16.c: 47: BYTE speed = (BYTE) arg & 0x0000000F;
+[e = _speed -> & -> -> _arg `uc `i -> 15 `i `uc ]
+[; ;SPI-PIC16.c: 50: switch( ctrl & 0x0000000F ) {
+"50
+[e $U 523  ]
 {
-[; ;main.c: 97: if (tick_get() - lastrun >= ((unsigned long long)((12000000 + 128ull)/256ull))) {
-"97
-[e $ ! >= - ( _tick_get ..  _lastrun / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul 524  ]
-{
-[; ;main.c: 98: lastrun = tick_get();
-"98
-[e = _lastrun ( _tick_get ..  ]
-[; ;main.c: 100: in = (float) tc_read_float(&sensor);
-"100
-[e = _in ( _tc_read_float (1 &U _sensor ]
-[; ;main.c: 102: pid_compute(pid);
-"102
-[e ( _pid_compute (1 _pid ]
-"105
-}
+[; ;SPI-PIC16.c: 52: case 0x00000001:
+"52
 [e :U 524 ]
-"106
+[; ;SPI-PIC16.c: 53: if( speed == 3 )
+"53
+[e $ ! == -> _speed `i -> 3 `i 525  ]
+[; ;SPI-PIC16.c: 54: SSPCON1bits.SSPM = 0;
+"54
+[e = . . _SSPCON1bits 0 0 -> -> 0 `i `uc ]
+[e $U 526  ]
+"55
+[e :U 525 ]
+[; ;SPI-PIC16.c: 55: else if( speed == 5 )
+[e $ ! == -> _speed `i -> 5 `i 527  ]
+[; ;SPI-PIC16.c: 56: SSPCON1bits.SSPM = 1;
+"56
+[e = . . _SSPCON1bits 0 0 -> -> 1 `i `uc ]
+[e $U 528  ]
+"57
+[e :U 527 ]
+[; ;SPI-PIC16.c: 57: else if( speed == 7 )
+[e $ ! == -> _speed `i -> 7 `i 529  ]
+[; ;SPI-PIC16.c: 58: SSPCON1bits.SSPM = 2;
+"58
+[e = . . _SSPCON1bits 0 0 -> -> 2 `i `uc ]
+[e $U 530  ]
+"59
+[e :U 529 ]
+[; ;SPI-PIC16.c: 59: else
+[; ;SPI-PIC16.c: 61: SSPCON1bits.SSPM = 2;
+"61
+[e = . . _SSPCON1bits 0 0 -> -> 2 `i `uc ]
+[e :U 530 ]
+[e :U 528 ]
+[e :U 526 ]
+[; ;SPI-PIC16.c: 62: break;
+"62
+[e $U 522  ]
+[; ;SPI-PIC16.c: 63: case 0x00000002:
+"63
+[e :U 531 ]
+[; ;SPI-PIC16.c: 65: SSPCON1bits.SSPM = 4;
+"65
+[e = . . _SSPCON1bits 0 0 -> -> 4 `i `uc ]
+[; ;SPI-PIC16.c: 66: break;
+"66
+[e $U 522  ]
+[; ;SPI-PIC16.c: 68: default:
+"68
+[e :U 532 ]
+[; ;SPI-PIC16.c: 69: return -2;
+"69
+[e ) -> -U -> 2 `i `uc ]
+[e $UE 520  ]
+"70
 }
-[; ;main.c: 105: }
-[; ;main.c: 106: }
-[e $U 521  ]
+[; ;SPI-PIC16.c: 70: }
+[e $U 522  ]
+"50
+[e :U 523 ]
+[e [\ & _ctrl -> -> -> 15 `i `l `ul , $ -> -> -> 1 `i `l `ul 524
+ , $ -> -> -> 2 `i `l `ul 531
+ 532 ]
+"70
 [e :U 522 ]
+[; ;SPI-PIC16.c: 73: switch( ctrl & 0x000000F0 ) {
+"73
+[e $U 534  ]
+{
+[; ;SPI-PIC16.c: 74: case 0x00000010:
+"74
+[e :U 535 ]
+[; ;SPI-PIC16.c: 75: SSPCON1bits.CKP = 0;
+"75
+[e = . . _SSPCON1bits 0 1 -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 76: SSPSTATbits.CKE = 0;
+"76
+[e = . . _SSPSTATbits 2 6 -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 77: break;
+"77
+[e $U 533  ]
+[; ;SPI-PIC16.c: 78: case 0x00000020:
+"78
+[e :U 536 ]
+[; ;SPI-PIC16.c: 79: SSPCON1bits.CKP = 0;
+"79
+[e = . . _SSPCON1bits 0 1 -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 80: SSPSTATbits.CKE = 1;
+"80
+[e = . . _SSPSTATbits 2 6 -> -> 1 `i `uc ]
+[; ;SPI-PIC16.c: 81: break;
+"81
+[e $U 533  ]
+[; ;SPI-PIC16.c: 82: case 0x00000030:
+"82
+[e :U 537 ]
+[; ;SPI-PIC16.c: 83: SSPCON1bits.CKP = 1;
+"83
+[e = . . _SSPCON1bits 0 1 -> -> 1 `i `uc ]
+[; ;SPI-PIC16.c: 84: SSPSTATbits.CKE = 0;
+"84
+[e = . . _SSPSTATbits 2 6 -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 85: break;
+"85
+[e $U 533  ]
+[; ;SPI-PIC16.c: 86: case 0x00000040:
+"86
+[e :U 538 ]
+[; ;SPI-PIC16.c: 87: SSPCON1bits.CKP = 1;
+"87
+[e = . . _SSPCON1bits 0 1 -> -> 1 `i `uc ]
+[; ;SPI-PIC16.c: 88: SSPSTATbits.CKE = 1;
+"88
+[e = . . _SSPSTATbits 2 6 -> -> 1 `i `uc ]
+[; ;SPI-PIC16.c: 89: break;
+"89
+[e $U 533  ]
+[; ;SPI-PIC16.c: 90: default:
+"90
+[e :U 539 ]
+[; ;SPI-PIC16.c: 91: return -2;
+"91
+[e ) -> -U -> 2 `i `uc ]
+[e $UE 520  ]
+"92
 }
-[; ;main.c: 108: }
-"108
+[; ;SPI-PIC16.c: 92: }
+[e $U 533  ]
+"73
+[e :U 534 ]
+[e [\ & _ctrl -> -> -> 240 `i `l `ul , $ -> -> -> 16 `i `l `ul 535
+ , $ -> -> -> 32 `i `l `ul 536
+ , $ -> -> -> 48 `i `l `ul 537
+ , $ -> -> -> 64 `i `l `ul 538
+ 539 ]
+"92
+[e :U 533 ]
+[; ;SPI-PIC16.c: 93: return 1;
+"93
+[e ) -> -> 1 `i `uc ]
+[e $UE 520  ]
+[; ;SPI-PIC16.c: 94: }
+"94
 [e :UE 520 ]
+}
+"97
+[v _spi_open `(uc ~T0 @X0 1 ef1`uc ]
+{
+[; ;SPI-PIC16.c: 96: uint8_t spi_open( xSPIHandle spid )
+[; ;SPI-PIC16.c: 97: {
+[e :U _spi_open ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;SPI-PIC16.c: 98: inuse = 1;
+"98
+[e = _inuse -> -> 1 `i `uc ]
+[; ;SPI-PIC16.c: 99: SSPCON1bits.SSPEN = 1;
+"99
+[e = . . _SSPCON1bits 0 2 -> -> 1 `i `uc ]
+[; ;SPI-PIC16.c: 100: return 1;
+"100
+[e ) -> -> 1 `i `uc ]
+[e $UE 540  ]
+[; ;SPI-PIC16.c: 101: }
+"101
+[e :UE 540 ]
+}
+"104
+[v _spi_close `(uc ~T0 @X0 1 ef1`uc ]
+{
+[; ;SPI-PIC16.c: 103: uint8_t spi_close( xSPIHandle spid )
+[; ;SPI-PIC16.c: 104: {
+[e :U _spi_close ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;SPI-PIC16.c: 105: inuse = 0;
+"105
+[e = _inuse -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 106: SSPCON1bits.SSPEN = 0;
+"106
+[e = . . _SSPCON1bits 0 2 -> -> 0 `i `uc ]
+[; ;SPI-PIC16.c: 107: return 1;
+"107
+[e ) -> -> 1 `i `uc ]
+[e $UE 541  ]
+[; ;SPI-PIC16.c: 108: }
+"108
+[e :UE 541 ]
+}
+"111
+[v _spi_write `(v ~T0 @X0 1 ef2`uc`uc ]
+{
+[; ;SPI-PIC16.c: 110: void spi_write( xSPIHandle spid, uint8_t data )
+[; ;SPI-PIC16.c: 111: {
+[e :U _spi_write ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[v _data `uc ~T0 @X0 1 r2 ]
+[f ]
+"112
+[v _rxtmp `uc ~T0 @X0 1 a ]
+[; ;SPI-PIC16.c: 112: uint8_t rxtmp;
+[; ;SPI-PIC16.c: 113: SSPBUF = data;
+"113
+[e = _SSPBUF _data ]
+[; ;SPI-PIC16.c: 114: while( !spi_available( spid ) );
+"114
+[e $U 543  ]
+[e :U 544 ]
+[e :U 543 ]
+[e $ ! != -> ( _spi_available (1 _spid `i -> -> -> 0 `i `uc `i 544  ]
+[e :U 545 ]
+[; ;SPI-PIC16.c: 115: rxtmp = SSPBUF;
+"115
+[e = _rxtmp _SSPBUF ]
+[; ;SPI-PIC16.c: 116: }
+"116
+[e :UE 542 ]
+}
+"119
+[v _spi_read `(uc ~T0 @X0 1 ef1`uc ]
+{
+[; ;SPI-PIC16.c: 118: BYTE spi_read( xSPIHandle spid )
+[; ;SPI-PIC16.c: 119: {
+[e :U _spi_read ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;SPI-PIC16.c: 120: SSPBUF = 0xAA;
+"120
+[e = _SSPBUF -> -> 170 `i `uc ]
+[; ;SPI-PIC16.c: 121: while( !spi_available( spid ) );
+"121
+[e $U 547  ]
+[e :U 548 ]
+[e :U 547 ]
+[e $ ! != -> ( _spi_available (1 _spid `i -> -> -> 0 `i `uc `i 548  ]
+[e :U 549 ]
+[; ;SPI-PIC16.c: 122: return SSPBUF;
+"122
+[e ) _SSPBUF ]
+[e $UE 546  ]
+[; ;SPI-PIC16.c: 123: }
+"123
+[e :UE 546 ]
+}
+"126
+[v _spi_write_array `(v ~T0 @X0 1 ef3`uc`*Cuc`ui ]
+{
+[; ;SPI-PIC16.c: 125: void spi_write_array( xSPIHandle spid, const uint8_t * txbuf, uint16_t len )
+[; ;SPI-PIC16.c: 126: {
+[e :U _spi_write_array ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[v _txbuf `*Cuc ~T0 @X0 1 r2 ]
+[v _len `ui ~T0 @X0 1 r3 ]
+[f ]
+"127
+[v _rxtmp `uc ~T0 @X0 1 a ]
+[; ;SPI-PIC16.c: 127: uint8_t rxtmp;
+[; ;SPI-PIC16.c: 128: while( len ) {
+"128
+[e $U 551  ]
+[e :U 552 ]
+{
+[; ;SPI-PIC16.c: 129: SSPBUF = *txbuf++;
+"129
+[e = _SSPBUF *U ++ _txbuf * -> -> 1 `i `x -> -> # *U _txbuf `i `x ]
+[; ;SPI-PIC16.c: 130: while( !spi_available( spid ) );
+"130
+[e $U 554  ]
+[e :U 555 ]
+[e :U 554 ]
+[e $ ! != -> ( _spi_available (1 _spid `i -> -> -> 0 `i `uc `i 555  ]
+[e :U 556 ]
+[; ;SPI-PIC16.c: 131: rxtmp = SSPBUF;
+"131
+[e = _rxtmp _SSPBUF ]
+[; ;SPI-PIC16.c: 132: len--;
+"132
+[e -- _len -> -> 1 `i `ui ]
+"133
+}
+[e :U 551 ]
+"128
+[e $ != _len -> -> 0 `i `ui 552  ]
+[e :U 553 ]
+[; ;SPI-PIC16.c: 133: }
+[; ;SPI-PIC16.c: 134: }
+"134
+[e :UE 550 ]
+}
+"137
+[v _spi_read_array `(v ~T0 @X0 1 ef3`uc`*uc`ui ]
+{
+[; ;SPI-PIC16.c: 136: void spi_read_array( xSPIHandle spid, uint8_t * rxbuf, uint16_t len )
+[; ;SPI-PIC16.c: 137: {
+[e :U _spi_read_array ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[v _rxbuf `*uc ~T0 @X0 1 r2 ]
+[v _len `ui ~T0 @X0 1 r3 ]
+[f ]
+[; ;SPI-PIC16.c: 138: while( len ) {
+"138
+[e $U 558  ]
+[e :U 559 ]
+{
+[; ;SPI-PIC16.c: 139: SSPBUF = 0xAA;
+"139
+[e = _SSPBUF -> -> 170 `i `uc ]
+[; ;SPI-PIC16.c: 140: while( !spi_available( spid ) );
+"140
+[e $U 561  ]
+[e :U 562 ]
+[e :U 561 ]
+[e $ ! != -> ( _spi_available (1 _spid `i -> -> -> 0 `i `uc `i 562  ]
+[e :U 563 ]
+[; ;SPI-PIC16.c: 141: *rxbuf++ = SSPBUF;
+"141
+[e = *U ++ _rxbuf * -> -> 1 `i `x -> -> # *U _rxbuf `i `x _SSPBUF ]
+[; ;SPI-PIC16.c: 142: len--;
+"142
+[e -- _len -> -> 1 `i `ui ]
+"143
+}
+[e :U 558 ]
+"138
+[e $ != _len -> -> 0 `i `ui 559  ]
+[e :U 560 ]
+[; ;SPI-PIC16.c: 143: }
+[; ;SPI-PIC16.c: 144: }
+"144
+[e :UE 557 ]
+}
+"147
+[v _spi_trans `(uc ~T0 @X0 1 ef2`uc`uc ]
+{
+[; ;SPI-PIC16.c: 146: BYTE spi_trans( xSPIHandle spid, uint8_t data )
+[; ;SPI-PIC16.c: 147: {
+[e :U _spi_trans ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[v _data `uc ~T0 @X0 1 r2 ]
+[f ]
+"148
+[v _rxtmp `uc ~T0 @X0 1 a ]
+[; ;SPI-PIC16.c: 148: uint8_t rxtmp;
+[; ;SPI-PIC16.c: 149: SSPBUF = data;
+"149
+[e = _SSPBUF _data ]
+[; ;SPI-PIC16.c: 150: while( !spi_available( spid ) );
+"150
+[e $U 565  ]
+[e :U 566 ]
+[e :U 565 ]
+[e $ ! != -> ( _spi_available (1 _spid `i -> -> -> 0 `i `uc `i 566  ]
+[e :U 567 ]
+[; ;SPI-PIC16.c: 151: rxtmp = SSPBUF;
+"151
+[e = _rxtmp _SSPBUF ]
+[; ;SPI-PIC16.c: 152: return rxtmp;
+"152
+[e ) _rxtmp ]
+[e $UE 564  ]
+[; ;SPI-PIC16.c: 153: }
+"153
+[e :UE 564 ]
+}
+"156
+[v _spi_trans_array `(v ~T0 @X0 1 ef4`uc`*uc`*uc`ui ]
+{
+[; ;SPI-PIC16.c: 155: void spi_trans_array( xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len )
+[; ;SPI-PIC16.c: 156: {
+[e :U _spi_trans_array ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[v _txbuf `*uc ~T0 @X0 1 r2 ]
+[v _rxbuf `*uc ~T0 @X0 1 r3 ]
+[v _len `ui ~T0 @X0 1 r4 ]
+[f ]
+[; ;SPI-PIC16.c: 157: while( len ) {
+"157
+[e $U 569  ]
+[e :U 570 ]
+{
+[; ;SPI-PIC16.c: 158: SSPBUF = *txbuf++;
+"158
+[e = _SSPBUF *U ++ _txbuf * -> -> 1 `i `x -> -> # *U _txbuf `i `x ]
+[; ;SPI-PIC16.c: 159: while( !spi_available( spid ) );
+"159
+[e $U 572  ]
+[e :U 573 ]
+[e :U 572 ]
+[e $ ! != -> ( _spi_available (1 _spid `i -> -> -> 0 `i `uc `i 573  ]
+[e :U 574 ]
+[; ;SPI-PIC16.c: 160: *rxbuf++ = SSPBUF;
+"160
+[e = *U ++ _rxbuf * -> -> 1 `i `x -> -> # *U _rxbuf `i `x _SSPBUF ]
+[; ;SPI-PIC16.c: 161: len--;
+"161
+[e -- _len -> -> 1 `i `ui ]
+"162
+}
+[e :U 569 ]
+"157
+[e $ != _len -> -> 0 `i `ui 570  ]
+[e :U 571 ]
+[; ;SPI-PIC16.c: 162: }
+[; ;SPI-PIC16.c: 163: }
+"163
+[e :UE 568 ]
+}
+"166
+[v _spi_available `(uc ~T0 @X0 1 sf1`uc ]
+{
+[; ;SPI-PIC16.c: 165: static uint8_t spi_available( xSPIHandle spid )
+[; ;SPI-PIC16.c: 166: {
+[e :U _spi_available ]
+[v _spid `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;SPI-PIC16.c: 167: return ( SSPSTATbits.BF ) ? 1 : 0;
+"167
+[e ) -> ? != -> . . _SSPSTATbits 2 0 `i -> -> -> 0 `i `Vuc `i : -> 1 `i -> 0 `i `uc ]
+[e $UE 575  ]
+[; ;SPI-PIC16.c: 168: }
+"168
+[e :UE 575 ]
 }

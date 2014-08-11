@@ -7,6 +7,9 @@
       <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h</itemPath>
       <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/TickPort.h</itemPath>
       <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.h</itemPath>
+      <itemPath>tc.h</itemPath>
+      <itemPath>io.h</itemPath>
+      <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -18,6 +21,9 @@
       <itemPath>main.c</itemPath>
       <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c</itemPath>
       <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c</itemPath>
+      <itemPath>tc.c</itemPath>
+      <itemPath>io.c</itemPath>
+      <itemPath>C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

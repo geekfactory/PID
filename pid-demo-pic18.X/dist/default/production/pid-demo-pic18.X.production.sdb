@@ -7,11 +7,18 @@ E_PID_DIRECT 0
 E_PID_REVERSE 1
 ]
 [s S24 pid_controller 40 `*.Mf 1 input 3 0 `*.Mf 1 output 3 3 `*.Mf 1 setpoint 3 6 `f 1 Kp 3 9 `f 1 Ki 3 12 `f 1 Kd 3 15 `f 1 omin 3 18 `f 1 omax 3 21 `f 1 iterm 3 24 `f 1 lastin 3 27 `ul 1 lasttime 4 30 `ul 1 sampletime 4 34 `uc 1 automode 1 38 `E4687 1 direction 1 39 ]
+[s S39 thermocuple_struct 2 `uc 1 spi 1 0 `uc 1 cspin 1 1 ]
+[e E4734 enSPIModules `uc
+E_SPI_1 1
+E_SPI_2 2
+E_SPI_3 3
+E_SPI_4 4
+]
 "7403 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
-[s S128 . 1 `uc 1 . 1 0 :7:0 
+[s S132 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
-[s S131 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S135 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -20,14 +27,14 @@ E_PID_REVERSE 1
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S140 . 1 `uc 1 . 1 0 :2:0 
+[s S144 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IP 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S145 . 1 `S128 1 . 1 0 `S131 1 . 1 0 `S140 1 . 1 0 ]
+[u S149 . 1 `S132 1 . 1 0 `S135 1 . 1 0 `S144 1 . 1 0 ]
 "7761
-[s S167 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S171 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -36,7 +43,7 @@ E_PID_REVERSE 1
 `uc 1 PEIE_GIEL 1 0 :1:6 
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
-[s S176 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S180 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -45,7 +52,7 @@ E_PID_REVERSE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S185 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S189 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -54,7 +61,7 @@ E_PID_REVERSE 1
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[s S194 . 1 `uc 1 . 1 0 :1:0 
+[s S198 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -63,17 +70,117 @@ E_PID_REVERSE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S203 . 1 `uc 1 . 1 0 :6:0 
+[s S207 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S207 . 1 `S167 1 . 1 0 `S176 1 . 1 0 `S185 1 . 1 0 `S194 1 . 1 0 `S203 1 . 1 0 ]
+[u S211 . 1 `S171 1 . 1 0 `S180 1 . 1 0 `S189 1 . 1 0 `S198 1 . 1 0 `S207 1 . 1 0 ]
 "69 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c
 [e E4687 enCtrlDirs `uc
 E_PID_DIRECT 0
 E_PID_REVERSE 1
 ]
-[s S284 pid_controller 40 `*.Mf 1 input 3 0 `*.Mf 1 output 3 3 `*.Mf 1 setpoint 3 6 `f 1 Kp 3 9 `f 1 Ki 3 12 `f 1 Kd 3 15 `f 1 omin 3 18 `f 1 omax 3 21 `f 1 iterm 3 24 `f 1 lastin 3 27 `ul 1 lasttime 4 30 `ul 1 sampletime 4 34 `uc 1 automode 1 38 `E4687 1 direction 1 39 ]
+[s S288 pid_controller 40 `*.Mf 1 input 3 0 `*.Mf 1 output 3 3 `*.Mf 1 setpoint 3 6 `f 1 Kp 3 9 `f 1 Ki 3 12 `f 1 Kd 3 15 `f 1 omin 3 18 `f 1 omax 3 21 `f 1 iterm 3 24 `f 1 lastin 3 27 `ul 1 lasttime 4 30 `ul 1 sampletime 4 34 `uc 1 automode 1 38 `E4687 1 direction 1 39 ]
+"141 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c
+[s S451 thermocuple_struct 2 `uc 1 spi 1 0 `uc 1 cspin 1 1 ]
+"80 io.c
+[e E4685 enSPIModules `uc
+E_SPI_1 1
+E_SPI_2 2
+E_SPI_3 3
+E_SPI_4 4
+]
+"103 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h
+[s S511 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+[s S517 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S522 . 1 `S511 1 . 1 0 `S517 1 . 1 0 ]
+"6233 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
+[s S537 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W 1 0 :1:2 
+]
+[s S540 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A 1 0 :1:5 
+]
+[s S543 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+[s S552 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W 1 0 :1:2 
+]
+[s S555 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A 1 0 :1:5 
+]
+[s S558 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S563 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DAT 1 0 :1:5 
+]
+[s S569 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S574 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_WRITE 1 0 :1:2 
+]
+[s S577 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_ADDRESS 1 0 :1:5 
+]
+[s S580 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S585 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[s S590 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S595 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 DA 1 0 :1:5 
+]
+[s S598 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RW 1 0 :1:2 
+]
+[s S601 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 START 1 0 :1:3 
+]
+[s S604 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 STOP 1 0 :1:4 
+]
+[s S607 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_W 1 0 :1:2 
+]
+[s S610 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_A 1 0 :1:5 
+]
+[u S613 . 1 `S537 1 . 1 0 `S540 1 . 1 0 `S543 1 . 1 0 `S537 1 . 1 0 `S540 1 . 1 0 `S558 1 . 1 0 `S563 1 . 1 0 `S569 1 . 1 0 `S574 1 . 1 0 `S577 1 . 1 0 `S580 1 . 1 0 `S585 1 . 1 0 `S590 1 . 1 0 `S595 1 . 1 0 `S598 1 . 1 0 `S601 1 . 1 0 `S604 1 . 1 0 `S607 1 . 1 0 `S610 1 . 1 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\abdiv.c
 [v ___abdiv `(c  1 e 1 0 ]
 "5 ../common/asfladd.c
@@ -109,6 +216,28 @@ E_PID_REVERSE 1
 [v _pid_auto `(v  1 e 0 0 ]
 "134
 [v _pid_direction `(v  1 e 0 0 ]
+"27 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _spi_init `(uc  1 e 1 0 ]
+"42
+[v _spi_control `(uc  1 e 1 0 ]
+"97
+[v _spi_open `(uc  1 e 1 0 ]
+"104
+[v _spi_close `(uc  1 e 1 0 ]
+"111
+[v _spi_write `(v  1 e 0 0 ]
+"119
+[v _spi_read `(uc  1 e 1 0 ]
+"126
+[v _spi_write_array `(v  1 e 0 0 ]
+"137
+[v _spi_read_array `(v  1 e 0 0 ]
+"147
+[v _spi_trans `(uc  1 e 1 0 ]
+"156
+[v _spi_trans_array `(v  1 e 0 0 ]
+"166
+[v _spi_available `(uc  1 s 1 spi_available ]
 "28 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c
 [v _tick_init `(v  1 e 0 0 ]
 "43
@@ -219,23 +348,143 @@ E_PID_REVERSE 1
 [v ___tmul `(um  1 e 3 0 ]
 "3 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\wmul.c
 [v ___wmul `(ui  1 e 2 0 ]
-"15 main.c
+"53 io.c
+[v _io_write `(v  1 e 0 0 ]
+"68
+[v _io_mode `(v  1 e 0 0 ]
+"81 main.c
 [v _main `(i  1 e 2 0 ]
+[s S39 thermocuple_struct 2 `uc 1 spi 1 0 `uc 1 cspin 1 1 ]
+"4 tc.c
+[v _tc_init `(S39  1 e 2 0 ]
+"19
+[v _tc_read `(i  1 e 2 0 ]
+"40
+[v _tc_read_float `(f  1 e 3 0 ]
+"22 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _inuse `uc  1 s 1 inuse ]
 "21 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c
 [v _tickcnt `VEul  1 s 4 tickcnt ]
 "23
 [v _tickbuffer `[6]uc  1 s 6 tickbuffer ]
-"7322 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
+"2373 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
+[v _PORTA `VEuc  1 e 1 @3968 ]
+"2529
+[v _PORTB `VEuc  1 e 1 @3969 ]
+"2638
+[v _PORTC `VEuc  1 e 1 @3970 ]
+"2791
+[v _PORTE `VEuc  1 e 1 @3972 ]
+"3406
+[v _TRISA `VEuc  1 e 1 @3986 ]
+"3603
+[v _TRISB `VEuc  1 e 1 @3987 ]
+"3824
+[v _TRISC `VEuc  1 e 1 @3988 ]
+"6213
+[v _SSPCON1 `VEuc  1 e 1 @4038 ]
+[s S511 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"6233
+[s S517 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S522 . 1 `S511 1 . 1 0 `S517 1 . 1 0 ]
+[v _SSPCON1bits `VES522  1 e 1 @4038 ]
+"6282
+[v _SSPSTAT `VEuc  1 e 1 @4039 ]
+[s S537 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W 1 0 :1:2 
+]
+"6384
+[s S540 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A 1 0 :1:5 
+]
+[s S543 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+[s S558 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S563 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DAT 1 0 :1:5 
+]
+[s S569 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S574 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_WRITE 1 0 :1:2 
+]
+[s S577 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_ADDRESS 1 0 :1:5 
+]
+[s S580 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S585 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[s S590 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S595 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 DA 1 0 :1:5 
+]
+[s S598 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RW 1 0 :1:2 
+]
+[s S601 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 START 1 0 :1:3 
+]
+[s S604 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 STOP 1 0 :1:4 
+]
+[s S607 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_W 1 0 :1:2 
+]
+[s S610 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_A 1 0 :1:5 
+]
+[u S613 . 1 `S537 1 . 1 0 `S540 1 . 1 0 `S543 1 . 1 0 `S537 1 . 1 0 `S540 1 . 1 0 `S558 1 . 1 0 `S563 1 . 1 0 `S569 1 . 1 0 `S574 1 . 1 0 `S577 1 . 1 0 `S580 1 . 1 0 `S585 1 . 1 0 `S590 1 . 1 0 `S595 1 . 1 0 `S598 1 . 1 0 `S601 1 . 1 0 `S604 1 . 1 0 `S607 1 . 1 0 `S610 1 . 1 0 ]
+[v _SSPSTATbits `VES613  1 e 1 @4039 ]
+"6554
+[v _SSPBUF `VEuc  1 e 1 @4041 ]
+"7322
 [v _T0CON `VEuc  1 e 1 @4053 ]
 "7397
 [v _TMR0L `VEuc  1 e 1 @4054 ]
 "7403
 [v _TMR0H `VEuc  1 e 1 @4055 ]
-[s S128 . 1 `uc 1 . 1 0 :7:0 
+[s S132 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "7761
-[s S131 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S135 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -244,14 +493,14 @@ E_PID_REVERSE 1
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S140 . 1 `uc 1 . 1 0 :2:0 
+[s S144 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IP 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S145 . 1 `S128 1 . 1 0 `S131 1 . 1 0 `S140 1 . 1 0 ]
-[v _INTCON2bits `VES145  1 e 1 @4081 ]
-[s S167 . 1 `uc 1 RBIF 1 0 :1:0 
+[u S149 . 1 `S132 1 . 1 0 `S135 1 . 1 0 `S144 1 . 1 0 ]
+[v _INTCON2bits `VES149  1 e 1 @4081 ]
+[s S171 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -261,7 +510,7 @@ E_PID_REVERSE 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "7862
-[s S176 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S180 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -270,7 +519,7 @@ E_PID_REVERSE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S185 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S189 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -279,7 +528,7 @@ E_PID_REVERSE 1
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[s S194 . 1 `uc 1 . 1 0 :1:0 
+[s S198 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -288,47 +537,76 @@ E_PID_REVERSE 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S203 . 1 `uc 1 . 1 0 :6:0 
+[s S207 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S207 . 1 `S167 1 . 1 0 `S176 1 . 1 0 `S185 1 . 1 0 `S194 1 . 1 0 `S203 1 . 1 0 ]
-[v _INTCONbits `VES207  1 e 1 @4082 ]
-"15 main.c
+[u S211 . 1 `S171 1 . 1 0 `S180 1 . 1 0 `S189 1 . 1 0 `S198 1 . 1 0 `S207 1 . 1 0 ]
+[v _INTCONbits `VES211  1 e 1 @4082 ]
+"3 io.c
+[v _portptrs `[4]*.sVEuc  1 e 8 0 ]
+"23
+[v _trisptrs `[3]*.MVEuc  1 e 6 0 ]
+"41
+[v _mask `C[8]uc  1 e 8 0 ]
+"69 main.c
+[v _lastrun `ul  1 e 4 0 ]
+"71
+[v _in `f  1 e 3 0 ]
+[v _out `f  1 e 3 0 ]
+[v _set `f  1 e 3 0 ]
+"73
+[v _pidctrl `S24  1 e 37 0 ]
+"74
+[v _pid `*.0S24  1 e 2 0 ]
+"76
+[v _spi `uc  1 e 1 0 ]
+"78
+[v _sensor `S39  1 e 2 0 ]
+"81
 [v _main `(i  1 e 2 0 ]
 {
-"21
-[v main@pidcontrol1 `S24  1 a 37 29 ]
-"27
-[v main@tcpl2 `ul  1 a 4 13 ]
-[v main@tcpl1 `ul  1 a 4 9 ]
-"17
-[v main@lastrun `ul  1 a 4 5 ]
-"19
-[v main@output `f  1 a 3 23 ]
-[v main@input1 `f  1 a 3 20 ]
-[v main@setpoint `f  1 a 3 17 ]
-[v main@input2 `f  1 a 3 0 ]
-"23
-[v main@pid1 `*.0S24  1 a 2 27 ]
-[v main@pid2 `*.MS24  1 a 2 3 ]
-"25
-[v main@spi `uc  1 a 1 26 ]
-"15
-[v main@argc `i  1 p 2 80 ]
-[v main@argv `*.M*.Muc  1 p 3 82 ]
-"53
+[v main@argc `i  1 p 2 90 ]
+[v main@argv `*.M*.Muc  1 p 3 92 ]
+"108
+} 0
+"27 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _spi_init `(uc  1 e 1 0 ]
+{
+[v spi_init@eModule `E4685  1 p 1 14 ]
+"39
+} 0
+"4 tc.c
+[v _tc_init `(S39  1 e 2 0 ]
+{
+"5
+[v tc_init@tcpl `S39  1 a 2 19 ]
+"4
+[v tc_init@spid `uc  1 p 1 16 ]
+[v tc_init@cspin `uc  1 p 1 17 ]
+"16
+} 0
+"42 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _spi_control `(uc  1 e 1 0 ]
+{
+"47
+[v spi_control@speed `uc  1 a 1 13 ]
+"42
+[v spi_control@spid `uc  1 p 1 0 ]
+[v spi_control@ctrl `ul  1 p 4 1 ]
+[v spi_control@arg `ul  1 p 4 5 ]
+"94
 } 0
 "21 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c
 [v _pid_create `(*.MS24  1 e 2 0 ]
 {
-[v pid_create@pid `*.0S24  1 p 2 48 ]
-[v pid_create@in `*.0f  1 p 2 50 ]
-[v pid_create@out `*.0f  1 p 2 52 ]
-[v pid_create@set `*.0f  1 p 2 54 ]
-[v pid_create@kp `f  1 p 3 56 ]
-[v pid_create@ki `f  1 p 3 59 ]
-[v pid_create@kd `f  1 p 3 62 ]
+[v pid_create@pid `*.0S24  1 p 2 52 ]
+[v pid_create@in `*.0f  1 p 2 54 ]
+[v pid_create@out `*.0f  1 p 2 56 ]
+[v pid_create@set `*.0f  1 p 2 58 ]
+[v pid_create@kp `f  1 p 3 60 ]
+[v pid_create@ki `f  1 p 3 63 ]
+[v pid_create@kd `f  1 p 3 66 ]
 "35
 } 0
 "102
@@ -345,21 +623,27 @@ E_PID_REVERSE 1
 [v pid_auto@pid `*.0S24  1 p 2 9 ]
 "131
 } 0
-"38
+"40 tc.c
+[v _tc_read_float `(f  1 e 3 0 ]
+{
+[v tc_read_float@tcpl `*.0S39  1 p 2 44 ]
+"43
+} 0
+"38 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c
 [v _pid_compute `(uc  1 e 1 0 ]
 {
 "57
-[v pid_compute@out `f  1 a 3 77 ]
+[v pid_compute@out `f  1 a 3 87 ]
 "45
-[v pid_compute@in `f  1 a 3 74 ]
+[v pid_compute@in `f  1 a 3 84 ]
 "47
-[v pid_compute@error `f  1 a 3 71 ]
+[v pid_compute@error `f  1 a 3 81 ]
 "55
-[v pid_compute@dinput `f  1 a 3 61 ]
+[v pid_compute@dinput `f  1 a 3 71 ]
 "39
-[v pid_compute@now `ul  1 a 4 67 ]
+[v pid_compute@now `ul  1 a 4 77 ]
 "38
-[v pid_compute@pid `*.0S24  1 p 2 47 ]
+[v pid_compute@pid `*.0S24  1 p 2 57 ]
 "71
 } 0
 "43 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c
@@ -383,21 +667,71 @@ E_PID_REVERSE 1
 [v _pid_tune `(v  1 e 0 0 ]
 {
 "78
-[v pid_tune@ssec `f  1 a 3 45 ]
+[v pid_tune@ssec `f  1 a 3 49 ]
 "74
-[v pid_tune@pid `*.0S24  1 p 2 34 ]
-[v pid_tune@kp `f  1 p 3 36 ]
-[v pid_tune@ki `f  1 p 3 39 ]
-[v pid_tune@kd `f  1 p 3 42 ]
+[v pid_tune@pid `*.0S24  1 p 2 38 ]
+[v pid_tune@kp `f  1 p 3 40 ]
+[v pid_tune@ki `f  1 p 3 43 ]
+[v pid_tune@kd `f  1 p 3 46 ]
 "89
+} 0
+"19 tc.c
+[v _tc_read `(i  1 e 2 0 ]
+{
+"20
+[v tc_read@buf `ui  1 a 2 42 ]
+"19
+[v tc_read@tcpl `*.0S39  1 p 2 38 ]
+"37
+} 0
+"53 io.c
+[v _io_write `(v  1 e 0 0 ]
+{
+"55
+[v io_write@num `uc  1 a 1 15 ]
+"54
+[v io_write@port `uc  1 a 1 14 ]
+"57
+[v io_write@now `uc  1 a 1 13 ]
+"53
+[v io_write@pin `uc  1 p 1 9 ]
+[v io_write@value `uc  1 p 1 10 ]
+"65
+} 0
+"137 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
+[v _spi_read_array `(v  1 e 0 0 ]
+{
+[v spi_read_array@spid `uc  1 p 1 1 ]
+[v spi_read_array@rxbuf `*.auc  1 p 2 2 ]
+[v spi_read_array@len `ui  1 p 2 4 ]
+"144
+} 0
+"166
+[v _spi_available `(uc  1 s 1 spi_available ]
+{
+[v spi_available@spid `uc  1 p 1 0 ]
+"168
+} 0
+"10 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\awdiv.c
+[v ___awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient `i  1 a 2 7 ]
+"12
+[v ___awdiv@sign `uc  1 a 1 6 ]
+[v ___awdiv@counter `uc  1 a 1 5 ]
+"10
+[v ___awdiv@dividend `i  1 p 2 0 ]
+[v ___awdiv@divisor `i  1 p 2 2 ]
+"42
 } 0
 "33 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\awtoft.c
 [v ___awtoft `(f  1 e 3 0 ]
 {
 "34
-[v ___awtoft@sign `uc  1 a 1 12 ]
+[v ___awtoft@sign `uc  1 a 1 20 ]
 "33
-[v ___awtoft@c `i  1 p 2 8 ]
+[v ___awtoft@c `i  1 p 2 16 ]
 "42
 } 0
 "50 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\ftdiv.c
@@ -425,14 +759,14 @@ E_PID_REVERSE 1
 [v ___ftmul `(f  1 e 3 0 ]
 {
 "54
-[v ___ftmul@f3_as_product `um  1 a 3 23 ]
+[v ___ftmul@f3_as_product `um  1 a 3 33 ]
 "53
-[v ___ftmul@sign `uc  1 a 1 27 ]
-[v ___ftmul@cntr `uc  1 a 1 26 ]
-[v ___ftmul@exp `uc  1 a 1 22 ]
+[v ___ftmul@sign `uc  1 a 1 37 ]
+[v ___ftmul@cntr `uc  1 a 1 36 ]
+[v ___ftmul@exp `uc  1 a 1 32 ]
 "52
-[v ___ftmul@f1 `f  1 p 3 11 ]
-[v ___ftmul@f2 `f  1 p 3 14 ]
+[v ___ftmul@f1 `f  1 p 3 21 ]
+[v ___ftmul@f2 `f  1 p 3 24 ]
 "84
 } 0
 "16 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\ftneg.c
@@ -461,19 +795,19 @@ E_PID_REVERSE 1
 "5 ../common/asftadd.c
 [v ___asftadd `(f  1 e 3 0 ]
 {
-[v ___asftadd@f1p `*.0f  1 p 2 42 ]
-[v ___asftadd@f2 `f  1 p 3 44 ]
+[v ___asftadd@f1p `*.0f  1 p 2 52 ]
+[v ___asftadd@f2 `f  1 p 3 54 ]
 "7
 } 0
 "87 C:\Program Files (x86)\Microchip\xc8\v1.12\sources\ftadd.c
 [v ___ftadd `(f  1 e 3 0 ]
 {
 "88
-[v ___ftadd@exp1 `uc  1 a 1 41 ]
-[v ___ftadd@exp2 `uc  1 a 1 40 ]
-[v ___ftadd@sign `uc  1 a 1 39 ]
+[v ___ftadd@exp1 `uc  1 a 1 51 ]
+[v ___ftadd@exp2 `uc  1 a 1 50 ]
+[v ___ftadd@sign `uc  1 a 1 49 ]
 "87
-[v ___ftadd@f1 `f  1 p 3 28 ]
-[v ___ftadd@f2 `f  1 p 3 31 ]
+[v ___ftadd@f1 `f  1 p 3 38 ]
+[v ___ftadd@f2 `f  1 p 3 41 ]
 "148
 } 0

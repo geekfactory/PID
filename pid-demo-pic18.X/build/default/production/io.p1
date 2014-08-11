@@ -1,31 +1,18 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[c E4687 0 1 .. ]
-[n E4687 enCtrlDirs E_PID_DIRECT E_PID_REVERSE  ]
-[s S518 `*f 1 `*f 1 `*f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `ul 1 `ul 1 `uc 1 `E4687 1 ]
-[n S518 pid_controller input output setpoint Kp Ki Kd omin omax iterm lastin lasttime sampletime automode direction ]
-[s S519 `uc 1 `uc 1 ]
-[n S519 thermocuple_struct spi cspin ]
-[p mainexit ]
-[c E4734 1 2 3 4 .. ]
-[n E4734 enSPIModules E_SPI_1 E_SPI_2 E_SPI_3 E_SPI_4  ]
-"90 ../SPI/SPI.h
-[v _spi_init `(uc ~T0 @X0 0 ef1`E4734 ]
-"103
-[v _spi_control `(uc ~T0 @X0 0 ef3`uc`ul`ul ]
-"58 tc.h
-[v _tc_init `(S519 ~T0 @X0 0 ef2`uc`uc ]
-"86 ../PID.h
-[v _pid_create `(*S518 ~T0 @X0 0 ef7`*S518`*f`*f`*f`f`f`f ]
-"95
-[v _pid_limits `(v ~T0 @X0 0 ef3`*S518`f`f ]
-"99
-[v _pid_auto `(v ~T0 @X0 0 ef1`*S518 ]
-"63 ../Tick/Tick.h
-[v _tick_get `(ul ~T0 @X0 0 ef ]
-"82 tc.h
-[v _tc_read_float `(f ~T0 @X0 0 ef1`*S519 ]
-"89 ../PID.h
-[v _pid_compute `(uc ~T0 @X0 0 ef1`*S518 ]
+"2373 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
+[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
+"2529
+[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
+"2638
+[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
+"2791
+[v _PORTE `Vuc ~T0 @X0 0 e@3972 ]
+"3406
+[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
+"3603
+[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
+"3824
+[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
 [; ;pic18f2550.h: 44: extern volatile unsigned short UFRM @ 0xF66;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
 [; ;pic18f2550.h: 46: asm("UFRM equ 0F66h");
@@ -4335,224 +4322,161 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;Tick.h: 51: void tick_init();
-[; ;Tick.h: 63: uint32_t tick_get();
-[; ;Tick.h: 72: void tick_update();
-[; ;PID.h: 37: enum enCtrlDirs {
-[; ;PID.h: 38: E_PID_DIRECT,
-[; ;PID.h: 39: E_PID_REVERSE,
-[; ;PID.h: 40: };
-[; ;PID.h: 42: struct pid_controller {
-[; ;PID.h: 44: float * input;
-[; ;PID.h: 45: float * output;
-[; ;PID.h: 46: float * setpoint;
-[; ;PID.h: 48: float Kp;
-[; ;PID.h: 49: float Ki;
-[; ;PID.h: 50: float Kd;
-[; ;PID.h: 52: float omin;
-[; ;PID.h: 53: float omax;
-[; ;PID.h: 55: float iterm;
-[; ;PID.h: 56: float lastin;
-[; ;PID.h: 58: uint32_t lasttime;
-[; ;PID.h: 59: uint32_t sampletime;
-[; ;PID.h: 61: uint8_t automode;
-[; ;PID.h: 62: enum enCtrlDirs direction;
-[; ;PID.h: 63: };
-[; ;PID.h: 65: typedef struct pid_controller * pid_t;
-[; ;PID.h: 86: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
-[; ;PID.h: 89: uint8_t pid_compute(pid_t pid);
-[; ;PID.h: 91: void pid_tune(pid_t pid, float kp, float ki, float kd);
-[; ;PID.h: 93: void pid_sample(pid_t pid, uint32_t time);
-[; ;PID.h: 95: void pid_limits(pid_t pid, float min, float max);
-[; ;PID.h: 97: void pid_direction(pid_t pid, enum enCtrlDirs direction);
-[; ;PID.h: 99: void pid_auto(pid_t pid);
-[; ;SPIPort.h: 18: typedef char xSPIHandle;
-[; ;SPI.h: 62: enum enSPIModules {
-[; ;SPI.h: 63: E_SPI_1 = 1,
-[; ;SPI.h: 64: E_SPI_2 = 2,
-[; ;SPI.h: 65: E_SPI_3 = 3,
-[; ;SPI.h: 66: E_SPI_4 = 4,
-[; ;SPI.h: 67: };
-[; ;SPI.h: 90: xSPIHandle spi_init(enum enSPIModules eModule);
-[; ;SPI.h: 103: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
-[; ;SPI.h: 115: uint8_t spi_open(xSPIHandle spid);
-[; ;SPI.h: 127: uint8_t spi_close(xSPIHandle spid);
-[; ;SPI.h: 136: void spi_write(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 145: uint8_t spi_read(xSPIHandle spid);
-[; ;SPI.h: 154: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
-[; ;SPI.h: 163: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
-[; ;SPI.h: 173: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 183: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
 [; ;io.h: 6: void io_write(uint8_t pin, uint8_t value);
 [; ;io.h: 8: void io_mode(uint8_t pin, uint8_t mode);
-[; ;tc.h: 37: struct thermocuple_struct
-[; ;tc.h: 38: {
-[; ;tc.h: 39: xSPIHandle spi;
-[; ;tc.h: 40: uint8_t cspin;
-[; ;tc.h: 41: };
-[; ;tc.h: 43: typedef struct thermocuple_struct tc_t;
-[; ;tc.h: 58: tc_t tc_init(xSPIHandle spid, uint8_t cspin);
-[; ;tc.h: 70: int16_t tc_read(tc_t * tcpl);
-[; ;tc.h: 82: float tc_read_float(tc_t * tcpl);
-"6 main.c
-[p x PLLDIV=1 ]
-"7
-[p x CPUDIV=OSC1_PLL2 ]
-"8
-[p x USBDIV=1 ]
-"11
-[p x FOSC=EC_EC ]
+"3 io.c
+[v _portptrs `*Vuc ~T0 @X0 -> 0 `x e ]
+[i _portptrs
+:U ..
+"6
+&U _PORTA
+"9
+&U _PORTB
 "12
-[p x FCMEN=OFF ]
-"13
-[p x IESO=OFF ]
-"16
-[p x PWRT=OFF ]
-"17
-[p x BOR=ON ]
+&U _PORTC
 "18
-[p x BORV=3 ]
-"19
-[p x VREGEN=OFF ]
-"22
-[p x WDT=ON ]
+&U _PORTE
+..
+]
+[; ;io.c: 3: volatile uint8_t * portptrs[] =
+[; ;io.c: 4: {
+[; ;io.c: 6: &PORTA,
+[; ;io.c: 9: &PORTB,
+[; ;io.c: 12: &PORTC,
+[; ;io.c: 18: &PORTE,
+[; ;io.c: 21: };
 "23
-[p x WDTPS=32768 ]
+[v _trisptrs `*Vuc ~T0 @X0 -> 0 `x e ]
+[i _trisptrs
+:U ..
 "26
-[p x CCP2MX=ON ]
-"27
-[p x PBADEN=ON ]
-"28
-[p x LPT1OSC=OFF ]
+&U _TRISA
 "29
-[p x MCLRE=ON ]
-"32
-[p x STVREN=ON ]
-"33
-[p x LVP=ON ]
-"34
-[p x XINST=OFF ]
-"37
-[p x CP0=OFF ]
-"38
-[p x CP1=OFF ]
-"39
-[p x CP2=OFF ]
+&U _TRISB
 "40
-[p x CP3=OFF ]
+&U _TRISC
+..
+]
+[; ;io.c: 23: volatile uint8_t * trisptrs[] =
+[; ;io.c: 24: {
+[; ;io.c: 26: &TRISA,
+[; ;io.c: 29: &TRISB,
+[; ;io.c: 32: &TRISC
+[; ;io.c: 40: };
+"41
+[v _mask `Cuc ~T0 @X0 -> 0 `x e ]
+[i _mask
+:U ..
 "43
-[p x CPB=OFF ]
+-> -> 1 `i `uc
 "44
-[p x CPD=OFF ]
+-> -> 2 `i `uc
+"45
+-> -> 4 `i `uc
+"46
+-> -> 8 `i `uc
 "47
-[p x WRT0=OFF ]
+-> -> 16 `i `uc
 "48
-[p x WRT1=OFF ]
+-> -> 32 `i `uc
 "49
-[p x WRT2=OFF ]
-"50
-[p x WRT3=OFF ]
+-> -> 64 `i `uc
+"51
+-> -> 128 `i `uc
+..
+]
+[; ;io.c: 41: const uint8_t mask[] =
+[; ;io.c: 42: {
+[; ;io.c: 43: 0x01,
+[; ;io.c: 44: 0x02,
+[; ;io.c: 45: 0x04,
+[; ;io.c: 46: 0x08,
+[; ;io.c: 47: 0x10,
+[; ;io.c: 48: 0x20,
+[; ;io.c: 49: 0x40,
+[; ;io.c: 50: 0x80
+[; ;io.c: 51: };
 "53
-[p x WRTC=OFF ]
-"54
-[p x WRTB=OFF ]
-"55
-[p x WRTD=OFF ]
-"58
-[p x EBTR0=OFF ]
-"59
-[p x EBTR1=OFF ]
-"60
-[p x EBTR2=OFF ]
-"61
-[p x EBTR3=OFF ]
-"64
-[p x EBTRB=OFF ]
-"69
-[v _lastrun `ul ~T0 @X0 1 e ]
-[i _lastrun
--> -> -> 0 `i `l `ul
-]
-[; ;main.c: 69: uint32_t lastrun = 0;
-"71
-[v _in `f ~T0 @X0 1 e ]
-[v _out `f ~T0 @X0 1 e ]
-[v _set `f ~T0 @X0 1 e ]
-[i _set
--> -> 100 `i `f
-]
-[; ;main.c: 71: float in, out, set = 100;
-"73
-[v _pidctrl `S518 ~T0 @X0 1 e ]
-[; ;main.c: 73: struct pid_controller pidctrl;
-"74
-[v _pid `*S518 ~T0 @X0 1 e ]
-[i _pid
--> -> 0 `i `*S518
-]
-[; ;main.c: 74: pid_t pid = 0;
-"76
-[v _spi `uc ~T0 @X0 1 e ]
-[; ;main.c: 76: xSPIHandle spi;
-"78
-[v _sensor `S519 ~T0 @X0 1 e ]
-[; ;main.c: 78: tc_t sensor;
-"81
-[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
+[v _io_write `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;main.c: 80: int main(int argc, char** argv)
-[; ;main.c: 81: {
-[e :U _main ]
-[v _argc `i ~T0 @X0 1 r1 ]
-[v _argv `**uc ~T0 @X0 1 r2 ]
+[; ;io.c: 52: void io_write( uint8_t pin, uint8_t value )
+[; ;io.c: 53: {
+[e :U _io_write ]
+[v _pin `uc ~T0 @X0 1 r1 ]
+[v _value `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;main.c: 82: spi = spi_init(E_SPI_1);
-"82
-[e = _spi ( _spi_init (1 -> . `E4734 0 `E4734 ]
-[; ;main.c: 83: spi_control(spi, 0x00000001 | 0x00000010, 7);
-"83
-[e ( _spi_control (3 , , _spi -> -> | -> 1 `i -> 16 `i `l `ul -> -> -> 7 `i `l `ul ]
-[; ;main.c: 86: sensor = tc_init(spi, 1);
-"86
-[e = _sensor ( _tc_init (2 , _spi -> -> 1 `i `uc ]
-[; ;main.c: 89: pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
-"89
-[e = _pid ( _pid_create (4 , , , , , , &U _pidctrl &U _in &U _out &U _set -> -> 5 `i `f -> -> 1 `i `f -> -> 3 `i `f ]
-[; ;main.c: 91: pid_limits(pid, 0, 255);
-"91
-[e ( _pid_limits (3 , , _pid -> -> 0 `i `f -> -> 255 `i `f ]
-[; ;main.c: 93: pid_auto(pid);
-"93
-[e ( _pid_auto (1 _pid ]
-[; ;main.c: 95: for (;;) {
-"95
-{
-[e :U 521 ]
-{
-[; ;main.c: 97: if (tick_get() - lastrun >= ((unsigned long long)((12000000 + 128ull)/256ull))) {
-"97
-[e $ ! >= - ( _tick_get ..  _lastrun / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul 524  ]
-{
-[; ;main.c: 98: lastrun = tick_get();
-"98
-[e = _lastrun ( _tick_get ..  ]
-[; ;main.c: 100: in = (float) tc_read_float(&sensor);
-"100
-[e = _in ( _tc_read_float (1 &U _sensor ]
-[; ;main.c: 102: pid_compute(pid);
-"102
-[e ( _pid_compute (1 _pid ]
-"105
+"54
+[v _port `uc ~T0 @X0 1 a ]
+[; ;io.c: 54: uint8_t port = pin / 8;
+[e = _port -> / -> _pin `i -> 8 `i `uc ]
+"55
+[v _num `uc ~T0 @X0 1 a ]
+[; ;io.c: 55: uint8_t num = pin % 8;
+[e = _num -> % -> _pin `i -> 8 `i `uc ]
+"57
+[v _now `uc ~T0 @X0 1 a ]
+[; ;io.c: 57: uint8_t now = *(portptrs[port]);
+[e = _now *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux ]
+[; ;io.c: 59: if( value == 0 )
+"59
+[e $ ! == -> _value `i -> 0 `i 519  ]
+[; ;io.c: 60: now &= ~mask[num];
+"60
+[e =& _now -> ~ -> *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux `i `uc ]
+[e $U 520  ]
+"61
+[e :U 519 ]
+[; ;io.c: 61: else
+[; ;io.c: 62: now |= mask[num];
+"62
+[e =| _now *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux ]
+[e :U 520 ]
+[; ;io.c: 64: *(portptrs[port]) = now;
+"64
+[e = *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux _now ]
+[; ;io.c: 65: }
+"65
+[e :UE 518 ]
 }
-[e :U 524 ]
-"106
-}
-[; ;main.c: 105: }
-[; ;main.c: 106: }
-[e $U 521  ]
+"68
+[v _io_mode `(v ~T0 @X0 1 ef2`uc`uc ]
+{
+[; ;io.c: 67: void io_mode( uint8_t pin, uint8_t value )
+[; ;io.c: 68: {
+[e :U _io_mode ]
+[v _pin `uc ~T0 @X0 1 r1 ]
+[v _value `uc ~T0 @X0 1 r2 ]
+[f ]
+"69
+[v _port `uc ~T0 @X0 1 a ]
+[; ;io.c: 69: uint8_t port = pin / 8;
+[e = _port -> / -> _pin `i -> 8 `i `uc ]
+"70
+[v _num `uc ~T0 @X0 1 a ]
+[; ;io.c: 70: uint8_t num = pin % 8;
+[e = _num -> % -> _pin `i -> 8 `i `uc ]
+"72
+[v _now `uc ~T0 @X0 1 a ]
+[; ;io.c: 72: uint8_t now = *(portptrs[port]);
+[e = _now *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux ]
+[; ;io.c: 74: if( value == 0 )
+"74
+[e $ ! == -> _value `i -> 0 `i 522  ]
+[; ;io.c: 75: now &= ~mask[num];
+"75
+[e =& _now -> ~ -> *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux `i `uc ]
+[e $U 523  ]
+"76
 [e :U 522 ]
-}
-[; ;main.c: 108: }
-"108
-[e :UE 520 ]
+[; ;io.c: 76: else
+[; ;io.c: 77: now |= mask[num];
+"77
+[e =| _now *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux ]
+[e :U 523 ]
+[; ;io.c: 79: *(portptrs[port]) = now;
+"79
+[e = *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux _now ]
+[; ;io.c: 80: }
+"80
+[e :UE 521 ]
 }

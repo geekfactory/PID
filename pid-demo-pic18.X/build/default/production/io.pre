@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "io.c"
 
 # 44 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h"
 extern volatile unsigned short UFRM @ 0xF66;
@@ -5709,229 +5709,79 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 51 "../Tick/Tick.h"
-void tick_init();
-
-# 63
-uint32_t tick_get();
-
-# 72
-void tick_update();
-
-# 37 "../PID.h"
-enum enCtrlDirs {
-E_PID_DIRECT,
-E_PID_REVERSE,
-};
-
-struct pid_controller {
-
-float * input;
-float * output;
-float * setpoint;
-
-float Kp;
-float Ki;
-float Kd;
-
-float omin;
-float omax;
-
-float iterm;
-float lastin;
-
-uint32_t lasttime;
-uint32_t sampletime;
-
-uint8_t automode;
-enum enCtrlDirs direction;
-};
-
-typedef struct pid_controller * pid_t;
-
-# 86
-pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
-
-
-uint8_t pid_compute(pid_t pid);
-
-void pid_tune(pid_t pid, float kp, float ki, float kd);
-
-void pid_sample(pid_t pid, uint32_t time);
-
-void pid_limits(pid_t pid, float min, float max);
-
-void pid_direction(pid_t pid, enum enCtrlDirs direction);
-
-void pid_auto(pid_t pid);
-
-# 18 "../SPI/SPIPort.h"
-typedef char xSPIHandle;
-
-# 62 "../SPI/SPI.h"
-enum enSPIModules {
-E_SPI_1 = 1,
-E_SPI_2 = 2,
-E_SPI_3 = 3,
-E_SPI_4 = 4,
-};
-
-# 90
-xSPIHandle spi_init(enum enSPIModules eModule);
-
-# 103
-uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
-
-# 115
-uint8_t spi_open(xSPIHandle spid);
-
-# 127
-uint8_t spi_close(xSPIHandle spid);
-
-# 136
-void spi_write(xSPIHandle spid, uint8_t data);
-
-# 145
-uint8_t spi_read(xSPIHandle spid);
-
-# 154
-void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
-
-# 163
-void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
-
-# 173
-uint8_t spi_trans(xSPIHandle spid, uint8_t data);
-
-# 183
-void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
-
 # 6 "io.h"
 void io_write(uint8_t pin, uint8_t value);
 
 void io_mode(uint8_t pin, uint8_t mode);
 
-# 37 "tc.h"
-struct thermocuple_struct
+# 3 "io.c"
+volatile uint8_t * portptrs[] =
 {
-xSPIHandle spi;
-uint8_t cspin;
+
+&PORTA,
+
+
+&PORTB,
+
+
+&PORTC,
+
+# 18
+&PORTE,
+
+
 };
 
-typedef struct thermocuple_struct tc_t;
-
-# 58
-tc_t tc_init(xSPIHandle spid, uint8_t cspin);
-
-# 70
-int16_t tc_read(tc_t * tcpl);
-
-# 82
-float tc_read_float(tc_t * tcpl);
-
-
-# 6 "main.c"
-#pragma config PLLDIV = 1
-#pragma config CPUDIV = OSC1_PLL2
-#pragma config USBDIV = 1
-
-
-#pragma config FOSC = EC_EC
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = OFF
-#pragma config BOR = ON
-#pragma config BORV = 3
-#pragma config VREGEN = OFF
-
-
-#pragma config WDT = ON
-#pragma config WDTPS = 32768
-
-
-#pragma config CCP2MX = ON
-#pragma config PBADEN = ON
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = ON
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
-
-
-
-
-uint32_t lastrun = 0;
-
-float in, out, set = 100;
-
-struct pid_controller pidctrl;
-pid_t pid = 0;
-
-xSPIHandle spi;
-
-tc_t sensor;
-
-int main(int argc, char** argv)
+volatile uint8_t * trisptrs[] =
 {
-spi = spi_init(E_SPI_1);
-spi_control(spi, 0x00000001 | 0x00000010, 7);
+
+&TRISA,
 
 
-sensor = tc_init(spi, 1);
+&TRISB,
 
 
-pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
+&TRISC
 
-pid_limits(pid, 0, 255);
+# 40
+};
+const uint8_t mask[] =
+{
+0x01,
+0x02,
+0x04,
+0x08,
+0x10,
+0x20,
+0x40,
+0x80
+};
+void io_write( uint8_t pin, uint8_t value )
+{
+uint8_t port = pin / 8;
+uint8_t num = pin % 8;
 
-pid_auto(pid);
+uint8_t now = *(portptrs[port]);
 
-for (;;) {
+if( value == 0 )
+now &= ~mask[num];
+else
+now |= mask[num];
 
-if (tick_get() - lastrun >= ((unsigned long long)((12000000 + 128ull)/256ull))) {
-lastrun = tick_get();
-
-in = (float) tc_read_float(&sensor);
-
-pid_compute(pid);
-
-
+*(portptrs[port]) = now;
 }
-}
 
-}
+void io_mode( uint8_t pin, uint8_t value )
+{
+uint8_t port = pin / 8;
+uint8_t num = pin % 8;
 
+uint8_t now = *(portptrs[port]);
+
+if( value == 0 )
+now &= ~mask[num];
+else
+now |= mask[num];
+
+*(portptrs[port]) = now;
+}

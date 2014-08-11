@@ -1,5 +1,5 @@
 /*	Floating point PID control loop for Microcontrollers
-	Copyright (C) 2014 Ruben Santa Anna Zamudio.
+	Copyright (C) 2014 Jesus Ruben Santa Anna Zamudio.
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -13,6 +13,9 @@
 
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	Author website: http://www.geekfactory.mx
+	Author e-mail: ruben at geekfactory dot mx
  */
 #ifndef PID_H
 #define PID_H
