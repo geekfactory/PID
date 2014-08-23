@@ -5709,16 +5709,16 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 51 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h"
+# 50 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h"
 void tick_init();
 
-# 63
+# 62
 uint32_t tick_get();
 
-# 72
+# 71
 void tick_update();
 
-# 37 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.h"
+# 40 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.h"
 enum enCtrlDirs {
 E_PID_DIRECT,
 E_PID_REVERSE,
@@ -5749,23 +5749,30 @@ enum enCtrlDirs direction;
 
 typedef struct pid_controller * pid_t;
 
-# 86
+# 90
 pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
 
-
+# 103
 uint8_t pid_compute(pid_t pid);
 
+# 116
 void pid_tune(pid_t pid, float kp, float ki, float kd);
 
+# 126
 void pid_sample(pid_t pid, uint32_t time);
 
+# 135
 void pid_limits(pid_t pid, float min, float max);
 
-void pid_direction(pid_t pid, enum enCtrlDirs direction);
-
+# 146
 void pid_auto(pid_t pid);
 
-# 20 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c"
+void pid_manual(pid_t pid);
+
+# 161
+void pid_direction(pid_t pid, enum enCtrlDirs direction);
+
+# 24 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c"
 pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd)
 {
 pid->input = in;

@@ -81,13 +81,13 @@ tc_t sensor2;
 int main(int argc, char** argv)
 {
 	spi = spi_init(E_SPI_1);
-		spi_control(spi, SPI_MASTER | SPI_MODE_0, SPI_DIV_1_64);
+	spi_control(spi, SPI_MASTER | SPI_MODE_0, SPI_DIV_1_64);
 
 	//Create thermocuples CS pin on RB2 and RB3
 	sensor1 = tc_init(spi, 10);
 	sensor2 = tc_init(spi, 11);
 
-	// Create new PID controllers, set gains
+	// Create PID controllers, set gains
 	pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
 	// Set output limits
 	pid_limits(pid, 0, 255);
@@ -95,7 +95,6 @@ int main(int argc, char** argv)
 	pid_auto(pid);
 
 	for (;;) {
-
 		if (tick_get() - lastrun >= TICK_SECOND) {
 			lastrun = tick_get();
 			// Read inputs

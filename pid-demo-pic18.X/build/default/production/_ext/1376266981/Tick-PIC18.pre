@@ -5709,13 +5709,13 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 51 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h"
+# 50 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h"
 void tick_init();
 
-# 63
+# 62
 uint32_t tick_get();
 
-# 72
+# 71
 void tick_update();
 
 # 21 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c"

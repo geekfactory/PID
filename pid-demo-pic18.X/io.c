@@ -1,5 +1,5 @@
-#include <xc.h>
 #include "io.h"
+#include <xc.h>
 volatile uint8_t * portptrs[] =
 {
 #if defined (_PORTA_RA0_POSN)
@@ -38,6 +38,7 @@ volatile uint8_t * trisptrs[] =
 	&TRISE,
 #endif
 };
+
 const uint8_t mask[] =
 {
 	0x01,
@@ -49,6 +50,23 @@ const uint8_t mask[] =
 	0x40,
 	0x80
 };
+
+
+void io_mode( uint8_t pin, uint8_t value )
+{
+	uint8_t port = pin / 8;
+	uint8_t num = pin % 8;
+
+	uint8_t now = *(trisptrs[port]);
+
+	if( value == OUTPUT )
+		now &= ~mask[num];
+	else
+		now |= mask[num];
+
+	*(trisptrs[port]) = now;
+}
+
 void io_write( uint8_t pin, uint8_t value )
 {
 	uint8_t port = pin / 8;
@@ -64,17 +82,16 @@ void io_write( uint8_t pin, uint8_t value )
 	*(portptrs[port]) = now;
 }
 
-void io_mode( uint8_t pin, uint8_t value )
+
+uint8_t io_read( uint8_t pin )
 {
 	uint8_t port = pin / 8;
 	uint8_t num = pin % 8;
 
 	uint8_t now = *(portptrs[port]);
 
-	if( value == LOW )
-		now &= ~mask[num];
+	if( now & mask[num])
+		return HIGH;
 	else
-		now |= mask[num];
-
-	*(portptrs[port]) = now;
+		return LOW;
 }

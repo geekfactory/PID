@@ -5,7 +5,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SSPSTAT `Vuc ~T0 @X0 0 e@4039 ]
 "6213
 [v _SSPCON1 `Vuc ~T0 @X0 0 e@4038 ]
-"103 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h
+"99 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h
 [v _spi_control `(uc ~T0 @X0 0 ef3`uc`ul`ul ]
 [s S399 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S399 . SSPM CKP SSPEN SSPOV WCOL ]
@@ -4371,22 +4371,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;SPIPort.h: 18: typedef char xSPIHandle;
-[; ;SPI.h: 62: enum enSPIModules {
-[; ;SPI.h: 63: E_SPI_1 = 1,
-[; ;SPI.h: 64: E_SPI_2 = 2,
-[; ;SPI.h: 65: E_SPI_3 = 3,
-[; ;SPI.h: 66: E_SPI_4 = 4,
-[; ;SPI.h: 67: };
-[; ;SPI.h: 90: xSPIHandle spi_init(enum enSPIModules eModule);
-[; ;SPI.h: 103: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
-[; ;SPI.h: 115: uint8_t spi_open(xSPIHandle spid);
-[; ;SPI.h: 127: uint8_t spi_close(xSPIHandle spid);
-[; ;SPI.h: 136: void spi_write(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 145: uint8_t spi_read(xSPIHandle spid);
-[; ;SPI.h: 154: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
-[; ;SPI.h: 163: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
-[; ;SPI.h: 173: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 183: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
+[; ;SPI.h: 58: enum enSPIModules {
+[; ;SPI.h: 59: E_SPI_1 = 1,
+[; ;SPI.h: 60: E_SPI_2 = 2,
+[; ;SPI.h: 61: E_SPI_3 = 3,
+[; ;SPI.h: 62: E_SPI_4 = 4,
+[; ;SPI.h: 63: };
+[; ;SPI.h: 86: xSPIHandle spi_init(enum enSPIModules eModule);
+[; ;SPI.h: 99: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
+[; ;SPI.h: 111: uint8_t spi_open(xSPIHandle spid);
+[; ;SPI.h: 122: uint8_t spi_close(xSPIHandle spid);
+[; ;SPI.h: 131: void spi_write(xSPIHandle spid, uint8_t data);
+[; ;SPI.h: 140: uint8_t spi_read(xSPIHandle spid);
+[; ;SPI.h: 149: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
+[; ;SPI.h: 158: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
+[; ;SPI.h: 168: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
+[; ;SPI.h: 178: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
 "22 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c
 [v _inuse `uc ~T0 @X0 1 s ]
 [i _inuse
@@ -4447,7 +4447,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 521 ]
 "47
 [v _speed `uc ~T0 @X0 1 a ]
-[; ;SPI-PIC16.c: 47: BYTE speed = (BYTE) arg & 0x0000000F;
+[; ;SPI-PIC16.c: 47: uint8_t speed = (uint8_t) arg & 0x0000000F;
 [e = _speed -> & -> -> _arg `uc `i -> 15 `i `uc ]
 [; ;SPI-PIC16.c: 50: switch( ctrl & 0x0000000F ) {
 "50
@@ -4674,7 +4674,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "119
 [v _spi_read `(uc ~T0 @X0 1 ef1`uc ]
 {
-[; ;SPI-PIC16.c: 118: BYTE spi_read( xSPIHandle spid )
+[; ;SPI-PIC16.c: 118: uint8_t spi_read( xSPIHandle spid )
 [; ;SPI-PIC16.c: 119: {
 [e :U _spi_read ]
 [v _spid `uc ~T0 @X0 1 r1 ]

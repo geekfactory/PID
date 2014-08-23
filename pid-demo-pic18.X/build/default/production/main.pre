@@ -5709,16 +5709,16 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 51 "../Tick/Tick.h"
+# 50 "../Tick/Tick.h"
 void tick_init();
 
-# 63
+# 62
 uint32_t tick_get();
 
-# 72
+# 71
 void tick_update();
 
-# 37 "../PID.h"
+# 40 "../PID.h"
 enum enCtrlDirs {
 E_PID_DIRECT,
 E_PID_REVERSE,
@@ -5749,26 +5749,33 @@ enum enCtrlDirs direction;
 
 typedef struct pid_controller * pid_t;
 
-# 86
+# 90
 pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
 
-
+# 103
 uint8_t pid_compute(pid_t pid);
 
+# 116
 void pid_tune(pid_t pid, float kp, float ki, float kd);
 
+# 126
 void pid_sample(pid_t pid, uint32_t time);
 
+# 135
 void pid_limits(pid_t pid, float min, float max);
 
-void pid_direction(pid_t pid, enum enCtrlDirs direction);
-
+# 146
 void pid_auto(pid_t pid);
+
+void pid_manual(pid_t pid);
+
+# 161
+void pid_direction(pid_t pid, enum enCtrlDirs direction);
 
 # 18 "../SPI/SPIPort.h"
 typedef char xSPIHandle;
 
-# 62 "../SPI/SPI.h"
+# 58 "../SPI/SPI.h"
 enum enSPIModules {
 E_SPI_1 = 1,
 E_SPI_2 = 2,
@@ -5776,40 +5783,44 @@ E_SPI_3 = 3,
 E_SPI_4 = 4,
 };
 
-# 90
+# 86
 xSPIHandle spi_init(enum enSPIModules eModule);
 
-# 103
+# 99
 uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
 
-# 115
+# 111
 uint8_t spi_open(xSPIHandle spid);
 
-# 127
+# 122
 uint8_t spi_close(xSPIHandle spid);
 
-# 136
+# 131
 void spi_write(xSPIHandle spid, uint8_t data);
 
-# 145
+# 140
 uint8_t spi_read(xSPIHandle spid);
 
-# 154
+# 149
 void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
 
-# 163
+# 158
 void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
 
-# 173
+# 168
 uint8_t spi_trans(xSPIHandle spid, uint8_t data);
 
-# 183
+# 178
 void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
 
-# 6 "io.h"
+# 59 "io.h"
+void io_mode(uint8_t pin, uint8_t mode);
+
+# 70
 void io_write(uint8_t pin, uint8_t value);
 
-void io_mode(uint8_t pin, uint8_t mode);
+# 83
+uint8_t io_read( uint8_t pin );
 
 # 37 "tc.h"
 struct thermocuple_struct
@@ -5842,23 +5853,23 @@ float tc_read_float(tc_t * tcpl);
 
 
 #pragma config PWRT = OFF
-#pragma config BOR = ON
+#pragma config BOR = OFF
 #pragma config BORV = 3
-#pragma config VREGEN = OFF
+#pragma config VREGEN = ON
 
 
-#pragma config WDT = ON
+#pragma config WDT = OFF
 #pragma config WDTPS = 32768
 
 
-#pragma config CCP2MX = ON
-#pragma config PBADEN = ON
+#pragma config CCP2MX = OFF
+#pragma config PBADEN = OFF
 #pragma config LPT1OSC = OFF
 #pragma config MCLRE = ON
 
 
 #pragma config STVREN = ON
-#pragma config LVP = ON
+#pragma config LVP = OFF
 #pragma config XINST = OFF
 
 
@@ -5903,7 +5914,8 @@ pid_t pid = 0;
 
 xSPIHandle spi;
 
-tc_t sensor;
+tc_t sensor1;
+tc_t sensor2;
 
 int main(int argc, char** argv)
 {
@@ -5911,7 +5923,8 @@ spi = spi_init(E_SPI_1);
 spi_control(spi, 0x00000001 | 0x00000010, 7);
 
 
-sensor = tc_init(spi, 1);
+sensor1 = tc_init(spi, 10);
+sensor2 = tc_init(spi, 11);
 
 
 pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
@@ -5921,11 +5934,10 @@ pid_limits(pid, 0, 255);
 pid_auto(pid);
 
 for (;;) {
-
 if (tick_get() - lastrun >= ((unsigned long long)((12000000 + 128ull)/256ull))) {
 lastrun = tick_get();
 
-in = (float) tc_read_float(&sensor);
+in = tc_read_float(&sensor1);
 
 pid_compute(pid);
 

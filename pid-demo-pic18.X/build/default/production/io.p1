@@ -13,6 +13,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
 "3824
 [v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
+[; ;stdint.h: 13: typedef signed char int8_t;
+[; ;stdint.h: 20: typedef signed int int16_t;
+[; ;stdint.h: 28: typedef signed short long int int24_t;
+[; ;stdint.h: 36: typedef signed long int int32_t;
+[; ;stdint.h: 43: typedef unsigned char uint8_t;
+[; ;stdint.h: 49: typedef unsigned int uint16_t;
+[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
+[; ;stdint.h: 63: typedef unsigned long int uint32_t;
+[; ;stdint.h: 71: typedef signed char int_least8_t;
+[; ;stdint.h: 78: typedef signed int int_least16_t;
+[; ;stdint.h: 90: typedef signed short long int int_least24_t;
+[; ;stdint.h: 98: typedef signed long int int_least32_t;
+[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
+[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
+[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
+[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
+[; ;stdint.h: 137: typedef signed char int_fast8_t;
+[; ;stdint.h: 144: typedef signed int int_fast16_t;
+[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
+[; ;stdint.h: 164: typedef signed long int int_fast32_t;
+[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
+[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
+[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
+[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
+[; ;stdint.h: 200: typedef int32_t intmax_t;
+[; ;stdint.h: 205: typedef uint32_t uintmax_t;
+[; ;stdint.h: 210: typedef int16_t intptr_t;
+[; ;stdint.h: 215: typedef uint16_t uintptr_t;
+[; ;io.h: 59: void io_mode(uint8_t pin, uint8_t mode);
+[; ;io.h: 70: void io_write(uint8_t pin, uint8_t value);
+[; ;io.h: 83: uint8_t io_read( uint8_t pin );
 [; ;pic18f2550.h: 44: extern volatile unsigned short UFRM @ 0xF66;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
 [; ;pic18f2550.h: 46: asm("UFRM equ 0F66h");
@@ -4294,36 +4325,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 144: extern void _delay(unsigned long);
 [; ;pic18.h: 146: extern void _delaywdt(unsigned long);
 [; ;pic18.h: 148: extern void _delay3(unsigned char);
-[; ;stdint.h: 13: typedef signed char int8_t;
-[; ;stdint.h: 20: typedef signed int int16_t;
-[; ;stdint.h: 28: typedef signed short long int int24_t;
-[; ;stdint.h: 36: typedef signed long int int32_t;
-[; ;stdint.h: 43: typedef unsigned char uint8_t;
-[; ;stdint.h: 49: typedef unsigned int uint16_t;
-[; ;stdint.h: 56: typedef unsigned short long int uint24_t;
-[; ;stdint.h: 63: typedef unsigned long int uint32_t;
-[; ;stdint.h: 71: typedef signed char int_least8_t;
-[; ;stdint.h: 78: typedef signed int int_least16_t;
-[; ;stdint.h: 90: typedef signed short long int int_least24_t;
-[; ;stdint.h: 98: typedef signed long int int_least32_t;
-[; ;stdint.h: 105: typedef unsigned char uint_least8_t;
-[; ;stdint.h: 111: typedef unsigned int uint_least16_t;
-[; ;stdint.h: 121: typedef unsigned short long int uint_least24_t;
-[; ;stdint.h: 128: typedef unsigned long int uint_least32_t;
-[; ;stdint.h: 137: typedef signed char int_fast8_t;
-[; ;stdint.h: 144: typedef signed int int_fast16_t;
-[; ;stdint.h: 156: typedef signed short long int int_fast24_t;
-[; ;stdint.h: 164: typedef signed long int int_fast32_t;
-[; ;stdint.h: 171: typedef unsigned char uint_fast8_t;
-[; ;stdint.h: 177: typedef unsigned int uint_fast16_t;
-[; ;stdint.h: 187: typedef unsigned short long int uint_fast24_t;
-[; ;stdint.h: 194: typedef unsigned long int uint_fast32_t;
-[; ;stdint.h: 200: typedef int32_t intmax_t;
-[; ;stdint.h: 205: typedef uint32_t uintmax_t;
-[; ;stdint.h: 210: typedef int16_t intptr_t;
-[; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;io.h: 6: void io_write(uint8_t pin, uint8_t value);
-[; ;io.h: 8: void io_mode(uint8_t pin, uint8_t mode);
 "3 io.c
 [v _portptrs `*Vuc ~T0 @X0 -> 0 `x e ]
 [i _portptrs
@@ -4363,120 +4364,160 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;io.c: 29: &TRISB,
 [; ;io.c: 32: &TRISC
 [; ;io.c: 40: };
-"41
+"42
 [v _mask `Cuc ~T0 @X0 -> 0 `x e ]
 [i _mask
 :U ..
-"43
--> -> 1 `i `uc
 "44
--> -> 2 `i `uc
+-> -> 1 `i `uc
 "45
--> -> 4 `i `uc
+-> -> 2 `i `uc
 "46
--> -> 8 `i `uc
+-> -> 4 `i `uc
 "47
--> -> 16 `i `uc
+-> -> 8 `i `uc
 "48
--> -> 32 `i `uc
+-> -> 16 `i `uc
 "49
+-> -> 32 `i `uc
+"50
 -> -> 64 `i `uc
-"51
+"52
 -> -> 128 `i `uc
 ..
 ]
-[; ;io.c: 41: const uint8_t mask[] =
-[; ;io.c: 42: {
-[; ;io.c: 43: 0x01,
-[; ;io.c: 44: 0x02,
-[; ;io.c: 45: 0x04,
-[; ;io.c: 46: 0x08,
-[; ;io.c: 47: 0x10,
-[; ;io.c: 48: 0x20,
-[; ;io.c: 49: 0x40,
-[; ;io.c: 50: 0x80
-[; ;io.c: 51: };
-"53
-[v _io_write `(v ~T0 @X0 1 ef2`uc`uc ]
-{
-[; ;io.c: 52: void io_write( uint8_t pin, uint8_t value )
-[; ;io.c: 53: {
-[e :U _io_write ]
-[v _pin `uc ~T0 @X0 1 r1 ]
-[v _value `uc ~T0 @X0 1 r2 ]
-[f ]
-"54
-[v _port `uc ~T0 @X0 1 a ]
-[; ;io.c: 54: uint8_t port = pin / 8;
-[e = _port -> / -> _pin `i -> 8 `i `uc ]
-"55
-[v _num `uc ~T0 @X0 1 a ]
-[; ;io.c: 55: uint8_t num = pin % 8;
-[e = _num -> % -> _pin `i -> 8 `i `uc ]
-"57
-[v _now `uc ~T0 @X0 1 a ]
-[; ;io.c: 57: uint8_t now = *(portptrs[port]);
-[e = _now *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux ]
-[; ;io.c: 59: if( value == 0 )
-"59
-[e $ ! == -> _value `i -> 0 `i 519  ]
-[; ;io.c: 60: now &= ~mask[num];
-"60
-[e =& _now -> ~ -> *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux `i `uc ]
-[e $U 520  ]
-"61
-[e :U 519 ]
-[; ;io.c: 61: else
-[; ;io.c: 62: now |= mask[num];
-"62
-[e =| _now *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux ]
-[e :U 520 ]
-[; ;io.c: 64: *(portptrs[port]) = now;
-"64
-[e = *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux _now ]
-[; ;io.c: 65: }
-"65
-[e :UE 518 ]
-}
-"68
+[; ;io.c: 42: const uint8_t mask[] =
+[; ;io.c: 43: {
+[; ;io.c: 44: 0x01,
+[; ;io.c: 45: 0x02,
+[; ;io.c: 46: 0x04,
+[; ;io.c: 47: 0x08,
+[; ;io.c: 48: 0x10,
+[; ;io.c: 49: 0x20,
+[; ;io.c: 50: 0x40,
+[; ;io.c: 51: 0x80
+[; ;io.c: 52: };
+"56
 [v _io_mode `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;io.c: 67: void io_mode( uint8_t pin, uint8_t value )
-[; ;io.c: 68: {
+[; ;io.c: 55: void io_mode( uint8_t pin, uint8_t value )
+[; ;io.c: 56: {
 [e :U _io_mode ]
 [v _pin `uc ~T0 @X0 1 r1 ]
 [v _value `uc ~T0 @X0 1 r2 ]
 [f ]
-"69
+"57
 [v _port `uc ~T0 @X0 1 a ]
-[; ;io.c: 69: uint8_t port = pin / 8;
+[; ;io.c: 57: uint8_t port = pin / 8;
 [e = _port -> / -> _pin `i -> 8 `i `uc ]
-"70
+"58
 [v _num `uc ~T0 @X0 1 a ]
-[; ;io.c: 70: uint8_t num = pin % 8;
+[; ;io.c: 58: uint8_t num = pin % 8;
 [e = _num -> % -> _pin `i -> 8 `i `uc ]
-"72
+"60
 [v _now `uc ~T0 @X0 1 a ]
-[; ;io.c: 72: uint8_t now = *(portptrs[port]);
-[e = _now *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux ]
-[; ;io.c: 74: if( value == 0 )
-"74
-[e $ ! == -> _value `i -> 0 `i 522  ]
-[; ;io.c: 75: now &= ~mask[num];
+[; ;io.c: 60: uint8_t now = *(trisptrs[port]);
+[e = _now *U *U + &U _trisptrs * -> _port `ux -> -> # *U &U _trisptrs `ui `ux ]
+[; ;io.c: 62: if( value == 0 )
+"62
+[e $ ! == -> _value `i -> 0 `i 519  ]
+[; ;io.c: 63: now &= ~mask[num];
+"63
+[e =& _now -> ~ -> *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux `i `uc ]
+[e $U 520  ]
+"64
+[e :U 519 ]
+[; ;io.c: 64: else
+[; ;io.c: 65: now |= mask[num];
+"65
+[e =| _now *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux ]
+[e :U 520 ]
+[; ;io.c: 67: *(trisptrs[port]) = now;
+"67
+[e = *U *U + &U _trisptrs * -> _port `ux -> -> # *U &U _trisptrs `ui `ux _now ]
+[; ;io.c: 68: }
+"68
+[e :UE 518 ]
+}
+"71
+[v _io_write `(v ~T0 @X0 1 ef2`uc`uc ]
+{
+[; ;io.c: 70: void io_write( uint8_t pin, uint8_t value )
+[; ;io.c: 71: {
+[e :U _io_write ]
+[v _pin `uc ~T0 @X0 1 r1 ]
+[v _value `uc ~T0 @X0 1 r2 ]
+[f ]
+"72
+[v _port `uc ~T0 @X0 1 a ]
+[; ;io.c: 72: uint8_t port = pin / 8;
+[e = _port -> / -> _pin `i -> 8 `i `uc ]
+"73
+[v _num `uc ~T0 @X0 1 a ]
+[; ;io.c: 73: uint8_t num = pin % 8;
+[e = _num -> % -> _pin `i -> 8 `i `uc ]
 "75
+[v _now `uc ~T0 @X0 1 a ]
+[; ;io.c: 75: uint8_t now = *(portptrs[port]);
+[e = _now *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux ]
+[; ;io.c: 77: if( value == 0 )
+"77
+[e $ ! == -> _value `i -> 0 `i 522  ]
+[; ;io.c: 78: now &= ~mask[num];
+"78
 [e =& _now -> ~ -> *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux `i `uc ]
 [e $U 523  ]
-"76
+"79
 [e :U 522 ]
-[; ;io.c: 76: else
-[; ;io.c: 77: now |= mask[num];
-"77
+[; ;io.c: 79: else
+[; ;io.c: 80: now |= mask[num];
+"80
 [e =| _now *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux ]
 [e :U 523 ]
-[; ;io.c: 79: *(portptrs[port]) = now;
-"79
+[; ;io.c: 82: *(portptrs[port]) = now;
+"82
 [e = *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux _now ]
-[; ;io.c: 80: }
-"80
+[; ;io.c: 83: }
+"83
 [e :UE 521 ]
+}
+"87
+[v _io_read `(uc ~T0 @X0 1 ef1`uc ]
+{
+[; ;io.c: 86: uint8_t io_read( uint8_t pin )
+[; ;io.c: 87: {
+[e :U _io_read ]
+[v _pin `uc ~T0 @X0 1 r1 ]
+[f ]
+"88
+[v _port `uc ~T0 @X0 1 a ]
+[; ;io.c: 88: uint8_t port = pin / 8;
+[e = _port -> / -> _pin `i -> 8 `i `uc ]
+"89
+[v _num `uc ~T0 @X0 1 a ]
+[; ;io.c: 89: uint8_t num = pin % 8;
+[e = _num -> % -> _pin `i -> 8 `i `uc ]
+"91
+[v _now `uc ~T0 @X0 1 a ]
+[; ;io.c: 91: uint8_t now = *(portptrs[port]);
+[e = _now *U *U + &U _portptrs * -> _port `ux -> -> # *U &U _portptrs `ui `ux ]
+[; ;io.c: 93: if( now & mask[num])
+"93
+[e $ ! != & -> _now `i -> *U + &U _mask * -> _num `ux -> -> # *U &U _mask `ui `ux `i -> 0 `i 525  ]
+[; ;io.c: 94: return 1;
+"94
+[e ) -> -> 1 `i `uc ]
+[e $UE 524  ]
+[e $U 526  ]
+"95
+[e :U 525 ]
+[; ;io.c: 95: else
+[; ;io.c: 96: return 0;
+"96
+[e ) -> -> 0 `i `uc ]
+[e $UE 524  ]
+[e :U 526 ]
+[; ;io.c: 97: }
+"97
+[e :UE 524 ]
 }

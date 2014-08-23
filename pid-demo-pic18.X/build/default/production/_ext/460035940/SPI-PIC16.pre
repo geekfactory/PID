@@ -5712,7 +5712,7 @@ typedef uint16_t uintptr_t;
 # 18 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPIPort.h"
 typedef char xSPIHandle;
 
-# 62 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h"
+# 58 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI.h"
 enum enSPIModules {
 E_SPI_1 = 1,
 E_SPI_2 = 2,
@@ -5720,34 +5720,34 @@ E_SPI_3 = 3,
 E_SPI_4 = 4,
 };
 
-# 90
+# 86
 xSPIHandle spi_init(enum enSPIModules eModule);
 
-# 103
+# 99
 uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
 
-# 115
+# 111
 uint8_t spi_open(xSPIHandle spid);
 
-# 127
+# 122
 uint8_t spi_close(xSPIHandle spid);
 
-# 136
+# 131
 void spi_write(xSPIHandle spid, uint8_t data);
 
-# 145
+# 140
 uint8_t spi_read(xSPIHandle spid);
 
-# 154
+# 149
 void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
 
-# 163
+# 158
 void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
 
-# 173
+# 168
 uint8_t spi_trans(xSPIHandle spid, uint8_t data);
 
-# 183
+# 178
 void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
 
 # 22 "C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/SPI/SPI-PIC16.c"
@@ -5776,7 +5776,7 @@ uint8_t spi_control( xSPIHandle spid, uint32_t ctrl, uint32_t arg )
 if( spid != 1 )
 return -1;
 
-BYTE speed = (BYTE) arg & 0x0000000F;
+uint8_t speed = (uint8_t) arg & 0x0000000F;
 
 
 switch( ctrl & 0x0000000F ) {
@@ -5847,7 +5847,7 @@ while( !spi_available( spid ) );
 rxtmp = SSPBUF;
 }
 
-BYTE spi_read( xSPIHandle spid )
+uint8_t spi_read( xSPIHandle spid )
 {
 SSPBUF = 0xAA;
 while( !spi_available( spid ) );

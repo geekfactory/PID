@@ -1,11 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [s S518 `uc 1 `uc 1 ]
 [n S518 thermocuple_struct spi cspin ]
-"6 io.h
+"70 io.h
 [v _io_write `(v ~T0 @X0 0 ef2`uc`uc ]
-"103 ../SPI/SPI.h
+"59
+[v _io_mode `(v ~T0 @X0 0 ef2`uc`uc ]
+"99 ../SPI/SPI.h
 [v _spi_control `(uc ~T0 @X0 0 ef3`uc`ul`ul ]
-"163
+"111
+[v _spi_open `(uc ~T0 @X0 0 ef1`uc ]
+"158
 [v _spi_read_array `(v ~T0 @X0 0 ef3`uc`*uc`ui ]
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
@@ -4317,24 +4321,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 146: extern void _delaywdt(unsigned long);
 [; ;pic18.h: 148: extern void _delay3(unsigned char);
 [; ;SPIPort.h: 18: typedef char xSPIHandle;
-[; ;SPI.h: 62: enum enSPIModules {
-[; ;SPI.h: 63: E_SPI_1 = 1,
-[; ;SPI.h: 64: E_SPI_2 = 2,
-[; ;SPI.h: 65: E_SPI_3 = 3,
-[; ;SPI.h: 66: E_SPI_4 = 4,
-[; ;SPI.h: 67: };
-[; ;SPI.h: 90: xSPIHandle spi_init(enum enSPIModules eModule);
-[; ;SPI.h: 103: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
-[; ;SPI.h: 115: uint8_t spi_open(xSPIHandle spid);
-[; ;SPI.h: 127: uint8_t spi_close(xSPIHandle spid);
-[; ;SPI.h: 136: void spi_write(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 145: uint8_t spi_read(xSPIHandle spid);
-[; ;SPI.h: 154: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
-[; ;SPI.h: 163: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
-[; ;SPI.h: 173: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 183: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
-[; ;io.h: 6: void io_write(uint8_t pin, uint8_t value);
-[; ;io.h: 8: void io_mode(uint8_t pin, uint8_t mode);
+[; ;SPI.h: 58: enum enSPIModules {
+[; ;SPI.h: 59: E_SPI_1 = 1,
+[; ;SPI.h: 60: E_SPI_2 = 2,
+[; ;SPI.h: 61: E_SPI_3 = 3,
+[; ;SPI.h: 62: E_SPI_4 = 4,
+[; ;SPI.h: 63: };
+[; ;SPI.h: 86: xSPIHandle spi_init(enum enSPIModules eModule);
+[; ;SPI.h: 99: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
+[; ;SPI.h: 111: uint8_t spi_open(xSPIHandle spid);
+[; ;SPI.h: 122: uint8_t spi_close(xSPIHandle spid);
+[; ;SPI.h: 131: void spi_write(xSPIHandle spid, uint8_t data);
+[; ;SPI.h: 140: uint8_t spi_read(xSPIHandle spid);
+[; ;SPI.h: 149: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
+[; ;SPI.h: 158: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
+[; ;SPI.h: 168: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
+[; ;SPI.h: 178: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
+[; ;io.h: 59: void io_mode(uint8_t pin, uint8_t mode);
+[; ;io.h: 70: void io_write(uint8_t pin, uint8_t value);
+[; ;io.h: 83: uint8_t io_read( uint8_t pin );
 [; ;tc.h: 37: struct thermocuple_struct
 [; ;tc.h: 38: {
 [; ;tc.h: 39: xSPIHandle spi;
@@ -4356,78 +4361,84 @@ Version 3.2 HI-TECH Software Intermediate Code
 "5
 [v _tcpl `S518 ~T0 @X0 1 a ]
 [; ;tc.c: 5: struct thermocuple_struct tcpl;
-[; ;tc.c: 8: io_write(cspin,1);
+[; ;tc.c: 8: io_write(cspin, 1);
 "8
 [e ( _io_write (2 , _cspin -> -> 1 `i `uc ]
-[; ;tc.c: 10: spi_control(spid, 0x00000001 | 0x00000020, 4 );
-"10
+[; ;tc.c: 9: io_mode(cspin, 0);
+"9
+[e ( _io_mode (2 , _cspin -> -> 0 `i `uc ]
+[; ;tc.c: 11: spi_control(spid, 0x00000001 | 0x00000020, 4);
+"11
 [e ( _spi_control (3 , , _spid -> -> | -> 1 `i -> 32 `i `l `ul -> -> -> 4 `i `l `ul ]
-[; ;tc.c: 12: tcpl.spi = spid;
+[; ;tc.c: 12: spi_open(spid);
 "12
+[e ( _spi_open (1 _spid ]
+[; ;tc.c: 14: tcpl.spi = spid;
+"14
 [e = . _tcpl 0 _spid ]
-[; ;tc.c: 13: tcpl.cspin = cspin;
-"13
-[e = . _tcpl 1 _cspin ]
-[; ;tc.c: 15: return tcpl;
+[; ;tc.c: 15: tcpl.cspin = cspin;
 "15
+[e = . _tcpl 1 _cspin ]
+[; ;tc.c: 17: return tcpl;
+"17
 [e ) _tcpl ]
 [e $UE 519  ]
-[; ;tc.c: 16: }
-"16
+[; ;tc.c: 18: }
+"18
 [e :UE 519 ]
 }
-"19
+"21
 [v _tc_read `(i ~T0 @X0 1 ef1`*S518 ]
 {
-[; ;tc.c: 18: int16_t tc_read( tc_t * tcpl )
-[; ;tc.c: 19: {
+[; ;tc.c: 20: int16_t tc_read(tc_t * tcpl)
+[; ;tc.c: 21: {
 [e :U _tc_read ]
 [v _tcpl `*S518 ~T0 @X0 1 r1 ]
 [f ]
-"20
+"22
 [v _buf `ui ~T0 @X0 1 a ]
-[; ;tc.c: 20: uint16_t buf = 0;
+[; ;tc.c: 22: uint16_t buf = 0;
 [e = _buf -> -> 0 `i `ui ]
-[; ;tc.c: 23: io_write( tcpl->cspin, 0 );
-"23
-[e ( _io_write (2 , . *U _tcpl 1 -> -> 0 `i `uc ]
-[; ;tc.c: 25: spi_read_array(tcpl->spi, (uint8_t *)&buf, 2);
+[; ;tc.c: 25: io_write(tcpl->cspin, 0);
 "25
-[e ( _spi_read_array (3 , , . *U _tcpl 0 -> &U _buf `*uc -> -> 2 `i `ui ]
-[; ;tc.c: 27: io_write( tcpl->cspin, 1 );
+[e ( _io_write (2 , . *U _tcpl 1 -> -> 0 `i `uc ]
+[; ;tc.c: 27: spi_read_array(tcpl->spi, (uint8_t *) & buf, 2);
 "27
-[e ( _io_write (2 , . *U _tcpl 1 -> -> 1 `i `uc ]
-[; ;tc.c: 29: if(buf & (1<<2))
+[e ( _spi_read_array (3 , , . *U _tcpl 0 -> &U _buf `*uc -> -> 2 `i `ui ]
+[; ;tc.c: 29: io_write(tcpl->cspin, 1);
 "29
+[e ( _io_write (2 , . *U _tcpl 1 -> -> 1 `i `uc ]
+[; ;tc.c: 31: if (buf & (1 << 2))
+"31
 [e $ ! != & _buf -> << -> 1 `i -> 2 `i `ui -> -> 0 `i `ui 521  ]
-[; ;tc.c: 30: return -1;
-"30
+[; ;tc.c: 32: return -1;
+"32
 [e ) -U -> 1 `i ]
 [e $UE 520  ]
 [e :U 521 ]
-[; ;tc.c: 32: buf &= 0x7FF8;
-"32
-[e =& _buf -> -> 32760 `i `ui ]
-[; ;tc.c: 34: buf >>= 3;
+[; ;tc.c: 34: buf &= 0x7FF8;
 "34
-[e =>> _buf -> 3 `i ]
-[; ;tc.c: 36: return buf/4;
+[e =& _buf -> -> 32760 `i `ui ]
+[; ;tc.c: 36: buf >>= 3;
 "36
-[e ) -> / _buf -> -> 4 `i `ui `i ]
-[e $UE 520  ]
-[; ;tc.c: 37: }
+[e =>> _buf -> 3 `i ]
+[; ;tc.c: 37: return buf;
 "37
+[e ) -> _buf `i ]
+[e $UE 520  ]
+[; ;tc.c: 38: }
+"38
 [e :UE 520 ]
 }
-"40
+"41
 [v _tc_read_float `(f ~T0 @X0 1 ef1`*S518 ]
 {
-[; ;tc.c: 39: float tc_read_float( tc_t * tcpl )
-[; ;tc.c: 40: {
+[; ;tc.c: 40: float tc_read_float(tc_t * tcpl)
+[; ;tc.c: 41: {
 [e :U _tc_read_float ]
 [v _tcpl `*S518 ~T0 @X0 1 r1 ]
 [f ]
-[; ;tc.c: 42: return ((float)tc_read(tcpl))* 0.25;
+[; ;tc.c: 42: return((float) tc_read(tcpl))* 0.25;
 "42
 [e ) -> * -> -> ( _tc_read (1 _tcpl `f `d .0.25 `f ]
 [e $UE 522  ]

@@ -4340,9 +4340,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;Tick.h: 51: void tick_init();
-[; ;Tick.h: 63: uint32_t tick_get();
-[; ;Tick.h: 72: void tick_update();
+[; ;Tick.h: 50: void tick_init();
+[; ;Tick.h: 62: uint32_t tick_get();
+[; ;Tick.h: 71: void tick_update();
 "21 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick-PIC18.c
 [v _tickcnt `Vul ~T0 @X0 1 s ]
 [i _tickcnt

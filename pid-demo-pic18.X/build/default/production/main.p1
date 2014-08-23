@@ -6,25 +6,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [s S519 `uc 1 `uc 1 ]
 [n S519 thermocuple_struct spi cspin ]
 [p mainexit ]
-[c E4734 1 2 3 4 .. ]
-[n E4734 enSPIModules E_SPI_1 E_SPI_2 E_SPI_3 E_SPI_4  ]
-"90 ../SPI/SPI.h
-[v _spi_init `(uc ~T0 @X0 0 ef1`E4734 ]
-"103
+[c E4736 1 2 3 4 .. ]
+[n E4736 enSPIModules E_SPI_1 E_SPI_2 E_SPI_3 E_SPI_4  ]
+"86 ../SPI/SPI.h
+[v _spi_init `(uc ~T0 @X0 0 ef1`E4736 ]
+"99
 [v _spi_control `(uc ~T0 @X0 0 ef3`uc`ul`ul ]
 "58 tc.h
 [v _tc_init `(S519 ~T0 @X0 0 ef2`uc`uc ]
-"86 ../PID.h
+"90 ../PID.h
 [v _pid_create `(*S518 ~T0 @X0 0 ef7`*S518`*f`*f`*f`f`f`f ]
-"95
+"135
 [v _pid_limits `(v ~T0 @X0 0 ef3`*S518`f`f ]
-"99
+"146
 [v _pid_auto `(v ~T0 @X0 0 ef1`*S518 ]
-"63 ../Tick/Tick.h
+"62 ../Tick/Tick.h
 [v _tick_get `(ul ~T0 @X0 0 ef ]
 "82 tc.h
 [v _tc_read_float `(f ~T0 @X0 0 ef1`*S519 ]
-"89 ../PID.h
+"103 ../PID.h
 [v _pid_compute `(uc ~T0 @X0 0 ef1`*S518 ]
 [; ;pic18f2550.h: 44: extern volatile unsigned short UFRM @ 0xF66;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
@@ -4335,56 +4335,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;Tick.h: 51: void tick_init();
-[; ;Tick.h: 63: uint32_t tick_get();
-[; ;Tick.h: 72: void tick_update();
-[; ;PID.h: 37: enum enCtrlDirs {
-[; ;PID.h: 38: E_PID_DIRECT,
-[; ;PID.h: 39: E_PID_REVERSE,
-[; ;PID.h: 40: };
-[; ;PID.h: 42: struct pid_controller {
-[; ;PID.h: 44: float * input;
-[; ;PID.h: 45: float * output;
-[; ;PID.h: 46: float * setpoint;
-[; ;PID.h: 48: float Kp;
-[; ;PID.h: 49: float Ki;
-[; ;PID.h: 50: float Kd;
-[; ;PID.h: 52: float omin;
-[; ;PID.h: 53: float omax;
-[; ;PID.h: 55: float iterm;
-[; ;PID.h: 56: float lastin;
-[; ;PID.h: 58: uint32_t lasttime;
-[; ;PID.h: 59: uint32_t sampletime;
-[; ;PID.h: 61: uint8_t automode;
-[; ;PID.h: 62: enum enCtrlDirs direction;
-[; ;PID.h: 63: };
-[; ;PID.h: 65: typedef struct pid_controller * pid_t;
-[; ;PID.h: 86: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
-[; ;PID.h: 89: uint8_t pid_compute(pid_t pid);
-[; ;PID.h: 91: void pid_tune(pid_t pid, float kp, float ki, float kd);
-[; ;PID.h: 93: void pid_sample(pid_t pid, uint32_t time);
-[; ;PID.h: 95: void pid_limits(pid_t pid, float min, float max);
-[; ;PID.h: 97: void pid_direction(pid_t pid, enum enCtrlDirs direction);
-[; ;PID.h: 99: void pid_auto(pid_t pid);
+[; ;Tick.h: 50: void tick_init();
+[; ;Tick.h: 62: uint32_t tick_get();
+[; ;Tick.h: 71: void tick_update();
+[; ;PID.h: 40: enum enCtrlDirs {
+[; ;PID.h: 41: E_PID_DIRECT,
+[; ;PID.h: 42: E_PID_REVERSE,
+[; ;PID.h: 43: };
+[; ;PID.h: 45: struct pid_controller {
+[; ;PID.h: 47: float * input;
+[; ;PID.h: 48: float * output;
+[; ;PID.h: 49: float * setpoint;
+[; ;PID.h: 51: float Kp;
+[; ;PID.h: 52: float Ki;
+[; ;PID.h: 53: float Kd;
+[; ;PID.h: 55: float omin;
+[; ;PID.h: 56: float omax;
+[; ;PID.h: 58: float iterm;
+[; ;PID.h: 59: float lastin;
+[; ;PID.h: 61: uint32_t lasttime;
+[; ;PID.h: 62: uint32_t sampletime;
+[; ;PID.h: 64: uint8_t automode;
+[; ;PID.h: 65: enum enCtrlDirs direction;
+[; ;PID.h: 66: };
+[; ;PID.h: 68: typedef struct pid_controller * pid_t;
+[; ;PID.h: 90: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
+[; ;PID.h: 103: uint8_t pid_compute(pid_t pid);
+[; ;PID.h: 116: void pid_tune(pid_t pid, float kp, float ki, float kd);
+[; ;PID.h: 126: void pid_sample(pid_t pid, uint32_t time);
+[; ;PID.h: 135: void pid_limits(pid_t pid, float min, float max);
+[; ;PID.h: 146: void pid_auto(pid_t pid);
+[; ;PID.h: 148: void pid_manual(pid_t pid);
+[; ;PID.h: 161: void pid_direction(pid_t pid, enum enCtrlDirs direction);
 [; ;SPIPort.h: 18: typedef char xSPIHandle;
-[; ;SPI.h: 62: enum enSPIModules {
-[; ;SPI.h: 63: E_SPI_1 = 1,
-[; ;SPI.h: 64: E_SPI_2 = 2,
-[; ;SPI.h: 65: E_SPI_3 = 3,
-[; ;SPI.h: 66: E_SPI_4 = 4,
-[; ;SPI.h: 67: };
-[; ;SPI.h: 90: xSPIHandle spi_init(enum enSPIModules eModule);
-[; ;SPI.h: 103: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
-[; ;SPI.h: 115: uint8_t spi_open(xSPIHandle spid);
-[; ;SPI.h: 127: uint8_t spi_close(xSPIHandle spid);
-[; ;SPI.h: 136: void spi_write(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 145: uint8_t spi_read(xSPIHandle spid);
-[; ;SPI.h: 154: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
-[; ;SPI.h: 163: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
-[; ;SPI.h: 173: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
-[; ;SPI.h: 183: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
-[; ;io.h: 6: void io_write(uint8_t pin, uint8_t value);
-[; ;io.h: 8: void io_mode(uint8_t pin, uint8_t mode);
+[; ;SPI.h: 58: enum enSPIModules {
+[; ;SPI.h: 59: E_SPI_1 = 1,
+[; ;SPI.h: 60: E_SPI_2 = 2,
+[; ;SPI.h: 61: E_SPI_3 = 3,
+[; ;SPI.h: 62: E_SPI_4 = 4,
+[; ;SPI.h: 63: };
+[; ;SPI.h: 86: xSPIHandle spi_init(enum enSPIModules eModule);
+[; ;SPI.h: 99: uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
+[; ;SPI.h: 111: uint8_t spi_open(xSPIHandle spid);
+[; ;SPI.h: 122: uint8_t spi_close(xSPIHandle spid);
+[; ;SPI.h: 131: void spi_write(xSPIHandle spid, uint8_t data);
+[; ;SPI.h: 140: uint8_t spi_read(xSPIHandle spid);
+[; ;SPI.h: 149: void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
+[; ;SPI.h: 158: void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
+[; ;SPI.h: 168: uint8_t spi_trans(xSPIHandle spid, uint8_t data);
+[; ;SPI.h: 178: void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
+[; ;io.h: 59: void io_mode(uint8_t pin, uint8_t mode);
+[; ;io.h: 70: void io_write(uint8_t pin, uint8_t value);
+[; ;io.h: 83: uint8_t io_read( uint8_t pin );
 [; ;tc.h: 37: struct thermocuple_struct
 [; ;tc.h: 38: {
 [; ;tc.h: 39: xSPIHandle spi;
@@ -4409,19 +4411,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 "16
 [p x PWRT=OFF ]
 "17
-[p x BOR=ON ]
+[p x BOR=OFF ]
 "18
 [p x BORV=3 ]
 "19
-[p x VREGEN=OFF ]
+[p x VREGEN=ON ]
 "22
-[p x WDT=ON ]
+[p x WDT=OFF ]
 "23
 [p x WDTPS=32768 ]
 "26
-[p x CCP2MX=ON ]
+[p x CCP2MX=OFF ]
 "27
-[p x PBADEN=ON ]
+[p x PBADEN=OFF ]
 "28
 [p x LPT1OSC=OFF ]
 "29
@@ -4429,7 +4431,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "32
 [p x STVREN=ON ]
 "33
-[p x LVP=ON ]
+[p x LVP=OFF ]
 "34
 [p x XINST=OFF ]
 "37
@@ -4495,64 +4497,70 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _spi `uc ~T0 @X0 1 e ]
 [; ;main.c: 76: xSPIHandle spi;
 "78
-[v _sensor `S519 ~T0 @X0 1 e ]
-[; ;main.c: 78: tc_t sensor;
-"81
+[v _sensor1 `S519 ~T0 @X0 1 e ]
+[; ;main.c: 78: tc_t sensor1;
+"79
+[v _sensor2 `S519 ~T0 @X0 1 e ]
+[; ;main.c: 79: tc_t sensor2;
+"82
 [v _main `(i ~T0 @X0 1 ef2`i`**uc ]
 {
-[; ;main.c: 80: int main(int argc, char** argv)
-[; ;main.c: 81: {
+[; ;main.c: 81: int main(int argc, char** argv)
+[; ;main.c: 82: {
 [e :U _main ]
 [v _argc `i ~T0 @X0 1 r1 ]
 [v _argv `**uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;main.c: 82: spi = spi_init(E_SPI_1);
-"82
-[e = _spi ( _spi_init (1 -> . `E4734 0 `E4734 ]
-[; ;main.c: 83: spi_control(spi, 0x00000001 | 0x00000010, 7);
+[; ;main.c: 83: spi = spi_init(E_SPI_1);
 "83
+[e = _spi ( _spi_init (1 -> . `E4736 0 `E4736 ]
+[; ;main.c: 84: spi_control(spi, 0x00000001 | 0x00000010, 7);
+"84
 [e ( _spi_control (3 , , _spi -> -> | -> 1 `i -> 16 `i `l `ul -> -> -> 7 `i `l `ul ]
-[; ;main.c: 86: sensor = tc_init(spi, 1);
-"86
-[e = _sensor ( _tc_init (2 , _spi -> -> 1 `i `uc ]
-[; ;main.c: 89: pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
-"89
-[e = _pid ( _pid_create (4 , , , , , , &U _pidctrl &U _in &U _out &U _set -> -> 5 `i `f -> -> 1 `i `f -> -> 3 `i `f ]
-[; ;main.c: 91: pid_limits(pid, 0, 255);
+[; ;main.c: 87: sensor1 = tc_init(spi, 10);
+"87
+[e = _sensor1 ( _tc_init (2 , _spi -> -> 10 `i `uc ]
+[; ;main.c: 88: sensor2 = tc_init(spi, 11);
+"88
+[e = _sensor2 ( _tc_init (2 , _spi -> -> 11 `i `uc ]
+[; ;main.c: 91: pid = pid_create(&pidctrl, &in, &out, &set, 5, 1, 3);
 "91
-[e ( _pid_limits (3 , , _pid -> -> 0 `i `f -> -> 255 `i `f ]
-[; ;main.c: 93: pid_auto(pid);
+[e = _pid ( _pid_create (4 , , , , , , &U _pidctrl &U _in &U _out &U _set -> -> 5 `i `f -> -> 1 `i `f -> -> 3 `i `f ]
+[; ;main.c: 93: pid_limits(pid, 0, 255);
 "93
-[e ( _pid_auto (1 _pid ]
-[; ;main.c: 95: for (;;) {
+[e ( _pid_limits (3 , , _pid -> -> 0 `i `f -> -> 255 `i `f ]
+[; ;main.c: 95: pid_auto(pid);
 "95
+[e ( _pid_auto (1 _pid ]
+[; ;main.c: 97: for (;;) {
+"97
 {
 [e :U 521 ]
 {
-[; ;main.c: 97: if (tick_get() - lastrun >= ((unsigned long long)((12000000 + 128ull)/256ull))) {
-"97
+[; ;main.c: 98: if (tick_get() - lastrun >= ((unsigned long long)((12000000 + 128ull)/256ull))) {
+"98
 [e $ ! >= - ( _tick_get ..  _lastrun / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul 524  ]
 {
-[; ;main.c: 98: lastrun = tick_get();
-"98
+[; ;main.c: 99: lastrun = tick_get();
+"99
 [e = _lastrun ( _tick_get ..  ]
-[; ;main.c: 100: in = (float) tc_read_float(&sensor);
-"100
-[e = _in ( _tc_read_float (1 &U _sensor ]
-[; ;main.c: 102: pid_compute(pid);
-"102
+[; ;main.c: 101: in = tc_read_float(&sensor1);
+"101
+[e = _in ( _tc_read_float (1 &U _sensor1 ]
+[; ;main.c: 103: pid_compute(pid);
+"103
 [e ( _pid_compute (1 _pid ]
-"105
-}
-[e :U 524 ]
 "106
 }
-[; ;main.c: 105: }
+[e :U 524 ]
+"107
+}
 [; ;main.c: 106: }
+[; ;main.c: 107: }
 [e $U 521  ]
 [e :U 522 ]
 }
-[; ;main.c: 108: }
-"108
+[; ;main.c: 109: }
+"109
 [e :UE 520 ]
 }

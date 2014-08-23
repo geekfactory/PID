@@ -3,13 +3,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n E4687 enCtrlDirs E_PID_DIRECT E_PID_REVERSE  ]
 [s S518 `*f 1 `*f 1 `*f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `f 1 `ul 1 `ul 1 `uc 1 `E4687 1 ]
 [n S518 pid_controller input output setpoint Kp Ki Kd omin omax iterm lastin lasttime sampletime automode direction ]
-"95 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.h
+"135 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.h
 [v _pid_limits `(v ~T0 @X0 0 ef3`*S518`f`f ]
-"97
+"161
 [v _pid_direction `(v ~T0 @X0 0 ef2`*S518`E4687 ]
-"91
+"116
 [v _pid_tune `(v ~T0 @X0 0 ef4`*S518`f`f`f ]
-"63 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h
+"62 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/Tick/Tick.h
 [v _tick_get `(ul ~T0 @X0 0 ef ]
 [; ;pic18f2550.h: 44: extern volatile unsigned short UFRM @ 0xF66;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2550.h
@@ -4320,42 +4320,43 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 205: typedef uint32_t uintmax_t;
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
-[; ;Tick.h: 51: void tick_init();
-[; ;Tick.h: 63: uint32_t tick_get();
-[; ;Tick.h: 72: void tick_update();
-[; ;PID.h: 37: enum enCtrlDirs {
-[; ;PID.h: 38: E_PID_DIRECT,
-[; ;PID.h: 39: E_PID_REVERSE,
-[; ;PID.h: 40: };
-[; ;PID.h: 42: struct pid_controller {
-[; ;PID.h: 44: float * input;
-[; ;PID.h: 45: float * output;
-[; ;PID.h: 46: float * setpoint;
-[; ;PID.h: 48: float Kp;
-[; ;PID.h: 49: float Ki;
-[; ;PID.h: 50: float Kd;
-[; ;PID.h: 52: float omin;
-[; ;PID.h: 53: float omax;
-[; ;PID.h: 55: float iterm;
-[; ;PID.h: 56: float lastin;
-[; ;PID.h: 58: uint32_t lasttime;
-[; ;PID.h: 59: uint32_t sampletime;
-[; ;PID.h: 61: uint8_t automode;
-[; ;PID.h: 62: enum enCtrlDirs direction;
-[; ;PID.h: 63: };
-[; ;PID.h: 65: typedef struct pid_controller * pid_t;
-[; ;PID.h: 86: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
-[; ;PID.h: 89: uint8_t pid_compute(pid_t pid);
-[; ;PID.h: 91: void pid_tune(pid_t pid, float kp, float ki, float kd);
-[; ;PID.h: 93: void pid_sample(pid_t pid, uint32_t time);
-[; ;PID.h: 95: void pid_limits(pid_t pid, float min, float max);
-[; ;PID.h: 97: void pid_direction(pid_t pid, enum enCtrlDirs direction);
-[; ;PID.h: 99: void pid_auto(pid_t pid);
-"21 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c
+[; ;Tick.h: 50: void tick_init();
+[; ;Tick.h: 62: uint32_t tick_get();
+[; ;Tick.h: 71: void tick_update();
+[; ;PID.h: 40: enum enCtrlDirs {
+[; ;PID.h: 41: E_PID_DIRECT,
+[; ;PID.h: 42: E_PID_REVERSE,
+[; ;PID.h: 43: };
+[; ;PID.h: 45: struct pid_controller {
+[; ;PID.h: 47: float * input;
+[; ;PID.h: 48: float * output;
+[; ;PID.h: 49: float * setpoint;
+[; ;PID.h: 51: float Kp;
+[; ;PID.h: 52: float Ki;
+[; ;PID.h: 53: float Kd;
+[; ;PID.h: 55: float omin;
+[; ;PID.h: 56: float omax;
+[; ;PID.h: 58: float iterm;
+[; ;PID.h: 59: float lastin;
+[; ;PID.h: 61: uint32_t lasttime;
+[; ;PID.h: 62: uint32_t sampletime;
+[; ;PID.h: 64: uint8_t automode;
+[; ;PID.h: 65: enum enCtrlDirs direction;
+[; ;PID.h: 66: };
+[; ;PID.h: 68: typedef struct pid_controller * pid_t;
+[; ;PID.h: 90: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
+[; ;PID.h: 103: uint8_t pid_compute(pid_t pid);
+[; ;PID.h: 116: void pid_tune(pid_t pid, float kp, float ki, float kd);
+[; ;PID.h: 126: void pid_sample(pid_t pid, uint32_t time);
+[; ;PID.h: 135: void pid_limits(pid_t pid, float min, float max);
+[; ;PID.h: 146: void pid_auto(pid_t pid);
+[; ;PID.h: 148: void pid_manual(pid_t pid);
+[; ;PID.h: 161: void pid_direction(pid_t pid, enum enCtrlDirs direction);
+"25 C:/Users/Ruben/Dropbox/Electronics/MCULib/PID/PID.c
 [v _pid_create `(*S518 ~T0 @X0 1 ef7`*S518`*f`*f`*f`f`f`f ]
 {
-[; ;PID.c: 20: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd)
-[; ;PID.c: 21: {
+[; ;PID.c: 24: pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd)
+[; ;PID.c: 25: {
 [e :U _pid_create ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [v _in `*f ~T0 @X0 1 r2 ]
@@ -4365,369 +4366,369 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ki `f ~T0 @X0 1 r6 ]
 [v _kd `f ~T0 @X0 1 r7 ]
 [f ]
-[; ;PID.c: 22: pid->input = in;
-"22
-[e = . *U _pid 0 _in ]
-[; ;PID.c: 23: pid->output = out;
-"23
-[e = . *U _pid 1 _out ]
-[; ;PID.c: 24: pid->setpoint = set;
-"24
-[e = . *U _pid 2 _set ]
-[; ;PID.c: 25: pid->automode = 0;
-"25
-[e = . *U _pid 12 -> -> 0 `i `uc ]
-[; ;PID.c: 26: pid_limits(pid, 0, 255);
+[; ;PID.c: 26: pid->input = in;
 "26
-[e ( _pid_limits (3 , , _pid -> -> 0 `i `f -> -> 255 `i `f ]
-[; ;PID.c: 27: pid->sampletime = 100 * (((unsigned long long)((12000000 + 128ull)/256ull)) / 1000);
+[e = . *U _pid 0 _in ]
+[; ;PID.c: 27: pid->output = out;
 "27
-[e = . *U _pid 11 * -> -> -> 100 `i `l `ul / / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul -> -> -> 1000 `i `l `ul ]
-[; ;PID.c: 29: pid_direction(pid, E_PID_DIRECT);
+[e = . *U _pid 1 _out ]
+[; ;PID.c: 28: pid->setpoint = set;
+"28
+[e = . *U _pid 2 _set ]
+[; ;PID.c: 29: pid->automode = 0;
 "29
-[e ( _pid_direction (2 , _pid -> . `E4687 0 `E4687 ]
-[; ;PID.c: 30: pid_tune(pid, kp, ki, kd);
+[e = . *U _pid 12 -> -> 0 `i `uc ]
+[; ;PID.c: 30: pid_limits(pid, 0, 255);
 "30
-[e ( _pid_tune (4 , , , _pid _kp _ki _kd ]
-[; ;PID.c: 32: pid->lasttime = tick_get() - pid->sampletime;
-"32
-[e = . *U _pid 10 - ( _tick_get ..  . *U _pid 11 ]
-[; ;PID.c: 34: return pid;
+[e ( _pid_limits (3 , , _pid -> -> 0 `i `f -> -> 255 `i `f ]
+[; ;PID.c: 31: pid->sampletime = 100 * (((unsigned long long)((12000000 + 128ull)/256ull)) / 1000);
+"31
+[e = . *U _pid 11 * -> -> -> 100 `i `l `ul / / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul -> -> -> 1000 `i `l `ul ]
+[; ;PID.c: 33: pid_direction(pid, E_PID_DIRECT);
+"33
+[e ( _pid_direction (2 , _pid -> . `E4687 0 `E4687 ]
+[; ;PID.c: 34: pid_tune(pid, kp, ki, kd);
 "34
+[e ( _pid_tune (4 , , , _pid _kp _ki _kd ]
+[; ;PID.c: 36: pid->lasttime = tick_get() - pid->sampletime;
+"36
+[e = . *U _pid 10 - ( _tick_get ..  . *U _pid 11 ]
+[; ;PID.c: 38: return pid;
+"38
 [e ) _pid ]
 [e $UE 519  ]
-[; ;PID.c: 35: }
-"35
+[; ;PID.c: 39: }
+"39
 [e :UE 519 ]
 }
-"38
+"42
 [v _pid_compute `(uc ~T0 @X0 1 ef1`*S518 ]
 {
-[; ;PID.c: 37: uint8_t pid_compute(pid_t pid)
-[; ;PID.c: 38: {
+[; ;PID.c: 41: uint8_t pid_compute(pid_t pid)
+[; ;PID.c: 42: {
 [e :U _pid_compute ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [f ]
-"39
+"43
 [v _now `ul ~T0 @X0 1 a ]
-[; ;PID.c: 39: uint32_t now;
-[; ;PID.c: 41: if (!pid->automode)
-"41
+[; ;PID.c: 43: uint32_t now;
+[; ;PID.c: 45: if (!pid->automode)
+"45
 [e $ ! ! != -> . *U _pid 12 `i -> -> -> 0 `i `uc `i 521  ]
-[; ;PID.c: 42: return 0;
-"42
+[; ;PID.c: 46: return 0;
+"46
 [e ) -> -> 0 `i `uc ]
 [e $UE 520  ]
 [e :U 521 ]
-[; ;PID.c: 43: now = tick_get();
-"43
+[; ;PID.c: 47: now = tick_get();
+"47
 [e = _now ( _tick_get ..  ]
-[; ;PID.c: 44: if (now - pid->lasttime >= pid->sampletime) {
-"44
+[; ;PID.c: 48: if (now - pid->lasttime >= pid->sampletime) {
+"48
 [e $ ! >= - _now . *U _pid 10 . *U _pid 11 522  ]
 {
-"45
-[v _in `f ~T0 @X0 1 a ]
-[; ;PID.c: 45: float in = *(pid->input);
-[e = _in *U . *U _pid 0 ]
-"47
-[v _error `f ~T0 @X0 1 a ]
-[; ;PID.c: 47: float error = (*(pid->setpoint)) - in;
-[e = _error - *U . *U _pid 2 _in ]
-[; ;PID.c: 49: pid->iterm += (pid->Ki * error);
 "49
-[e =+ . *U _pid 8 * . *U _pid 4 _error ]
-[; ;PID.c: 50: if (pid->iterm > pid->omax)
-"50
-[e $ ! > . *U _pid 8 . *U _pid 7 523  ]
-[; ;PID.c: 51: pid->iterm = pid->omax;
+[v _in `f ~T0 @X0 1 a ]
+[; ;PID.c: 49: float in = *(pid->input);
+[e = _in *U . *U _pid 0 ]
 "51
+[v _error `f ~T0 @X0 1 a ]
+[; ;PID.c: 51: float error = (*(pid->setpoint)) - in;
+[e = _error - *U . *U _pid 2 _in ]
+[; ;PID.c: 53: pid->iterm += (pid->Ki * error);
+"53
+[e =+ . *U _pid 8 * . *U _pid 4 _error ]
+[; ;PID.c: 54: if (pid->iterm > pid->omax)
+"54
+[e $ ! > . *U _pid 8 . *U _pid 7 523  ]
+[; ;PID.c: 55: pid->iterm = pid->omax;
+"55
 [e = . *U _pid 8 . *U _pid 7 ]
 [e $U 524  ]
-"52
+"56
 [e :U 523 ]
-[; ;PID.c: 52: else if (pid->iterm < pid->omin)
+[; ;PID.c: 56: else if (pid->iterm < pid->omin)
 [e $ ! < . *U _pid 8 . *U _pid 6 525  ]
-[; ;PID.c: 53: pid->iterm = pid->omin;
-"53
+[; ;PID.c: 57: pid->iterm = pid->omin;
+"57
 [e = . *U _pid 8 . *U _pid 6 ]
 [e :U 525 ]
-"55
+"59
 [e :U 524 ]
 [v _dinput `f ~T0 @X0 1 a ]
-[; ;PID.c: 55: float dinput = in - pid->lastin;
+[; ;PID.c: 59: float dinput = in - pid->lastin;
 [e = _dinput - _in . *U _pid 9 ]
-"57
+"61
 [v _out `f ~T0 @X0 1 a ]
-[; ;PID.c: 57: float out = pid->Kp * error + pid->iterm - pid->Kd * dinput;
+[; ;PID.c: 61: float out = pid->Kp * error + pid->iterm - pid->Kd * dinput;
 [e = _out - + * . *U _pid 3 _error . *U _pid 8 * . *U _pid 5 _dinput ]
-[; ;PID.c: 59: if (out > pid->omax)
-"59
+[; ;PID.c: 63: if (out > pid->omax)
+"63
 [e $ ! > _out . *U _pid 7 526  ]
-[; ;PID.c: 60: out = pid->omax;
-"60
+[; ;PID.c: 64: out = pid->omax;
+"64
 [e = _out . *U _pid 7 ]
 [e $U 527  ]
-"61
+"65
 [e :U 526 ]
-[; ;PID.c: 61: else if (out < pid->omin)
+[; ;PID.c: 65: else if (out < pid->omin)
 [e $ ! < _out . *U _pid 6 528  ]
-[; ;PID.c: 62: out = pid->omin;
-"62
+[; ;PID.c: 66: out = pid->omin;
+"66
 [e = _out . *U _pid 6 ]
 [e :U 528 ]
-"64
-[e :U 527 ]
-[; ;PID.c: 64: *(pid->output) = out;
-[e = *U . *U _pid 1 _out ]
-[; ;PID.c: 66: pid->lastin = in;
-"66
-[e = . *U _pid 9 _in ]
-[; ;PID.c: 67: pid->lasttime = now;
-"67
-[e = . *U _pid 10 _now ]
-[; ;PID.c: 68: return 1;
 "68
+[e :U 527 ]
+[; ;PID.c: 68: *(pid->output) = out;
+[e = *U . *U _pid 1 _out ]
+[; ;PID.c: 70: pid->lastin = in;
+"70
+[e = . *U _pid 9 _in ]
+[; ;PID.c: 71: pid->lasttime = now;
+"71
+[e = . *U _pid 10 _now ]
+[; ;PID.c: 72: return 1;
+"72
 [e ) -> -> 1 `i `uc ]
 [e $UE 520  ]
-"69
+"73
 }
 [e :U 522 ]
-[; ;PID.c: 69: }
-[; ;PID.c: 70: return 0;
-"70
+[; ;PID.c: 73: }
+[; ;PID.c: 74: return 0;
+"74
 [e ) -> -> 0 `i `uc ]
 [e $UE 520  ]
-[; ;PID.c: 71: }
-"71
+[; ;PID.c: 75: }
+"75
 [e :UE 520 ]
 }
-"74
+"78
 [v _pid_tune `(v ~T0 @X0 1 ef4`*S518`f`f`f ]
 {
-[; ;PID.c: 73: void pid_tune(pid_t pid, float kp, float ki, float kd)
-[; ;PID.c: 74: {
+[; ;PID.c: 77: void pid_tune(pid_t pid, float kp, float ki, float kd)
+[; ;PID.c: 78: {
 [e :U _pid_tune ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [v _kp `f ~T0 @X0 1 r2 ]
 [v _ki `f ~T0 @X0 1 r3 ]
 [v _kd `f ~T0 @X0 1 r4 ]
 [f ]
-[; ;PID.c: 75: if (kp < 0 || ki < 0 || kd < 0)
-"75
+[; ;PID.c: 79: if (kp < 0 || ki < 0 || kd < 0)
+"79
 [e $ ! || || < _kp -> -> 0 `i `f < _ki -> -> 0 `i `f < _kd -> -> 0 `i `f 530  ]
-[; ;PID.c: 76: return;
-"76
+[; ;PID.c: 80: return;
+"80
 [e $UE 529  ]
 [e :U 530 ]
-"78
-[v _ssec `f ~T0 @X0 1 a ]
-[; ;PID.c: 78: float ssec = ((float) pid->sampletime) / ((unsigned long long)((12000000 + 128ull)/256ull));
-[e = _ssec / -> . *U _pid 11 `f -> / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul `f ]
-[; ;PID.c: 80: pid->Kp = kp;
-"80
-[e = . *U _pid 3 _kp ]
-[; ;PID.c: 81: pid->Ki = ki * ssec;
-"81
-[e = . *U _pid 4 * _ki _ssec ]
-[; ;PID.c: 82: pid->Kd = kd / ssec;
 "82
-[e = . *U _pid 5 / _kd _ssec ]
-[; ;PID.c: 84: if (pid->direction == E_PID_REVERSE) {
+[v _ssec `f ~T0 @X0 1 a ]
+[; ;PID.c: 82: float ssec = ((float) pid->sampletime) / ((unsigned long long)((12000000 + 128ull)/256ull));
+[e = _ssec / -> . *U _pid 11 `f -> / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul `f ]
+[; ;PID.c: 84: pid->Kp = kp;
 "84
+[e = . *U _pid 3 _kp ]
+[; ;PID.c: 85: pid->Ki = ki * ssec;
+"85
+[e = . *U _pid 4 * _ki _ssec ]
+[; ;PID.c: 86: pid->Kd = kd / ssec;
+"86
+[e = . *U _pid 5 / _kd _ssec ]
+[; ;PID.c: 88: if (pid->direction == E_PID_REVERSE) {
+"88
 [e $ ! == -> . *U _pid 13 `i -> . `E4687 1 `i 531  ]
 {
-[; ;PID.c: 85: pid->Kp = 0 - pid->Kp;
-"85
+[; ;PID.c: 89: pid->Kp = 0 - pid->Kp;
+"89
 [e = . *U _pid 3 - -> -> 0 `i `f . *U _pid 3 ]
-[; ;PID.c: 86: pid->Ki = 0 - pid->Ki;
-"86
+[; ;PID.c: 90: pid->Ki = 0 - pid->Ki;
+"90
 [e = . *U _pid 4 - -> -> 0 `i `f . *U _pid 4 ]
-[; ;PID.c: 87: pid->Kd = 0 - pid->Kd;
-"87
+[; ;PID.c: 91: pid->Kd = 0 - pid->Kd;
+"91
 [e = . *U _pid 5 - -> -> 0 `i `f . *U _pid 5 ]
-"88
+"92
 }
 [e :U 531 ]
-[; ;PID.c: 88: }
-[; ;PID.c: 89: }
-"89
+[; ;PID.c: 92: }
+[; ;PID.c: 93: }
+"93
 [e :UE 529 ]
 }
-"92
+"96
 [v _pid_sample `(v ~T0 @X0 1 ef2`*S518`ul ]
 {
-[; ;PID.c: 91: void pid_sample(pid_t pid, uint32_t time)
-[; ;PID.c: 92: {
+[; ;PID.c: 95: void pid_sample(pid_t pid, uint32_t time)
+[; ;PID.c: 96: {
 [e :U _pid_sample ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [v _time `ul ~T0 @X0 1 r2 ]
 [f ]
-[; ;PID.c: 93: if (time > 0) {
-"93
+[; ;PID.c: 97: if (time > 0) {
+"97
 [e $ ! > _time -> -> -> 0 `i `l `ul 533  ]
 {
-"94
-[v _ratio `f ~T0 @X0 1 a ]
-[; ;PID.c: 94: float ratio = (float) (time * (((unsigned long long)((12000000 + 128ull)/256ull)) / 1000)) / (float) pid->sampletime;
-[e = _ratio / -> * _time / / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul -> -> -> 1000 `i `l `ul `f -> . *U _pid 11 `f ]
-[; ;PID.c: 95: pid->Ki *= ratio;
-"95
-[e =* . *U _pid 4 _ratio ]
-[; ;PID.c: 96: pid->Kd /= ratio;
-"96
-[e =/ . *U _pid 5 _ratio ]
-[; ;PID.c: 97: pid->sampletime = (uint32_t) (time * (((unsigned long long)((12000000 + 128ull)/256ull)) / 1000));
-"97
-[e = . *U _pid 11 * _time / / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul -> -> -> 1000 `i `l `ul ]
 "98
+[v _ratio `f ~T0 @X0 1 a ]
+[; ;PID.c: 98: float ratio = (float) (time * (((unsigned long long)((12000000 + 128ull)/256ull)) / 1000)) / (float) pid->sampletime;
+[e = _ratio / -> * _time / / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul -> -> -> 1000 `i `l `ul `f -> . *U _pid 11 `f ]
+[; ;PID.c: 99: pid->Ki *= ratio;
+"99
+[e =* . *U _pid 4 _ratio ]
+[; ;PID.c: 100: pid->Kd /= ratio;
+"100
+[e =/ . *U _pid 5 _ratio ]
+[; ;PID.c: 101: pid->sampletime = (uint32_t) (time * (((unsigned long long)((12000000 + 128ull)/256ull)) / 1000));
+"101
+[e = . *U _pid 11 * _time / / + -> -> 12000000 `l `ul -> 128 `ul -> 256 `ul -> -> -> 1000 `i `l `ul ]
+"102
 }
 [e :U 533 ]
-[; ;PID.c: 98: }
-[; ;PID.c: 99: }
-"99
+[; ;PID.c: 102: }
+[; ;PID.c: 103: }
+"103
 [e :UE 532 ]
 }
-"102
+"106
 [v _pid_limits `(v ~T0 @X0 1 ef3`*S518`f`f ]
 {
-[; ;PID.c: 101: void pid_limits(pid_t pid, float min, float max)
-[; ;PID.c: 102: {
+[; ;PID.c: 105: void pid_limits(pid_t pid, float min, float max)
+[; ;PID.c: 106: {
 [e :U _pid_limits ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [v _min `f ~T0 @X0 1 r2 ]
 [v _max `f ~T0 @X0 1 r3 ]
 [f ]
-[; ;PID.c: 103: if (min >= max) return;
-"103
+[; ;PID.c: 107: if (min >= max) return;
+"107
 [e $ ! >= _min _max 535  ]
 [e $UE 534  ]
 [e :U 535 ]
-[; ;PID.c: 104: pid->omin = min;
-"104
+[; ;PID.c: 108: pid->omin = min;
+"108
 [e = . *U _pid 6 _min ]
-[; ;PID.c: 105: pid->omax = max;
-"105
+[; ;PID.c: 109: pid->omax = max;
+"109
 [e = . *U _pid 7 _max ]
-[; ;PID.c: 107: if (pid->automode) {
-"107
+[; ;PID.c: 111: if (pid->automode) {
+"111
 [e $ ! != -> . *U _pid 12 `i -> -> -> 0 `i `uc `i 536  ]
 {
-[; ;PID.c: 108: if (*(pid->output) > pid->omax)
-"108
+[; ;PID.c: 112: if (*(pid->output) > pid->omax)
+"112
 [e $ ! > *U . *U _pid 1 . *U _pid 7 537  ]
-[; ;PID.c: 109: *(pid->output) = pid->omax;
-"109
+[; ;PID.c: 113: *(pid->output) = pid->omax;
+"113
 [e = *U . *U _pid 1 . *U _pid 7 ]
 [e $U 538  ]
-"110
+"114
 [e :U 537 ]
-[; ;PID.c: 110: else if (*(pid->output) < pid->omin)
+[; ;PID.c: 114: else if (*(pid->output) < pid->omin)
 [e $ ! < *U . *U _pid 1 . *U _pid 6 539  ]
-[; ;PID.c: 111: *(pid->output) = pid->omin;
-"111
+[; ;PID.c: 115: *(pid->output) = pid->omin;
+"115
 [e = *U . *U _pid 1 . *U _pid 6 ]
 [e :U 539 ]
-"113
+"117
 [e :U 538 ]
-[; ;PID.c: 113: if (pid->iterm > pid->omax)
+[; ;PID.c: 117: if (pid->iterm > pid->omax)
 [e $ ! > . *U _pid 8 . *U _pid 7 540  ]
-[; ;PID.c: 114: pid->iterm = pid->omax;
-"114
+[; ;PID.c: 118: pid->iterm = pid->omax;
+"118
 [e = . *U _pid 8 . *U _pid 7 ]
 [e $U 541  ]
-"115
+"119
 [e :U 540 ]
-[; ;PID.c: 115: else if (pid->iterm < pid->omin)
+[; ;PID.c: 119: else if (pid->iterm < pid->omin)
 [e $ ! < . *U _pid 8 . *U _pid 6 542  ]
-[; ;PID.c: 116: pid->iterm = pid->omin;
-"116
+[; ;PID.c: 120: pid->iterm = pid->omin;
+"120
 [e = . *U _pid 8 . *U _pid 6 ]
 [e :U 542 ]
-"117
+"121
 [e :U 541 ]
 }
 [e :U 536 ]
-[; ;PID.c: 117: }
-[; ;PID.c: 118: }
-"118
+[; ;PID.c: 121: }
+[; ;PID.c: 122: }
+"122
 [e :UE 534 ]
 }
-"121
+"125
 [v _pid_auto `(v ~T0 @X0 1 ef1`*S518 ]
 {
-[; ;PID.c: 120: void pid_auto(pid_t pid)
-[; ;PID.c: 121: {
+[; ;PID.c: 124: void pid_auto(pid_t pid)
+[; ;PID.c: 125: {
 [e :U _pid_auto ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [f ]
-[; ;PID.c: 122: if (!pid->automode) {
-"122
+[; ;PID.c: 126: if (!pid->automode) {
+"126
 [e $ ! ! != -> . *U _pid 12 `i -> -> -> 0 `i `uc `i 544  ]
 {
-[; ;PID.c: 123: pid->lastin = *(pid->output);
-"123
+[; ;PID.c: 127: pid->lastin = *(pid->output);
+"127
 [e = . *U _pid 9 *U . *U _pid 1 ]
-[; ;PID.c: 124: pid->lastin = *(pid->input);
-"124
+[; ;PID.c: 128: pid->lastin = *(pid->input);
+"128
 [e = . *U _pid 9 *U . *U _pid 0 ]
-[; ;PID.c: 125: if (pid->iterm > pid->omax)
-"125
+[; ;PID.c: 129: if (pid->iterm > pid->omax)
+"129
 [e $ ! > . *U _pid 8 . *U _pid 7 545  ]
-[; ;PID.c: 126: pid->iterm = pid->omax;
-"126
+[; ;PID.c: 130: pid->iterm = pid->omax;
+"130
 [e = . *U _pid 8 . *U _pid 7 ]
 [e $U 546  ]
-"127
+"131
 [e :U 545 ]
-[; ;PID.c: 127: else if (pid->iterm < pid->omin)
+[; ;PID.c: 131: else if (pid->iterm < pid->omin)
 [e $ ! < . *U _pid 8 . *U _pid 6 547  ]
-[; ;PID.c: 128: pid->iterm = pid->omin;
-"128
+[; ;PID.c: 132: pid->iterm = pid->omin;
+"132
 [e = . *U _pid 8 . *U _pid 6 ]
 [e :U 547 ]
-"129
+"133
 [e :U 546 ]
-[; ;PID.c: 129: pid->automode = 1;
+[; ;PID.c: 133: pid->automode = 1;
 [e = . *U _pid 12 -> -> 1 `i `uc ]
-"130
+"134
 }
 [e :U 544 ]
-[; ;PID.c: 130: }
-[; ;PID.c: 131: }
-"131
+[; ;PID.c: 134: }
+[; ;PID.c: 135: }
+"135
 [e :UE 543 ]
 }
-"134
+"138
 [v _pid_direction `(v ~T0 @X0 1 ef2`*S518`E4687 ]
 {
-[; ;PID.c: 133: void pid_direction(pid_t pid, enum enCtrlDirs direction)
-[; ;PID.c: 134: {
+[; ;PID.c: 137: void pid_direction(pid_t pid, enum enCtrlDirs direction)
+[; ;PID.c: 138: {
 [e :U _pid_direction ]
 [v _pid `*S518 ~T0 @X0 1 r1 ]
 [v _direction `E4687 ~T0 @X0 1 r2 ]
 [f ]
-[; ;PID.c: 135: if (pid->automode && pid->direction != direction) {
-"135
+[; ;PID.c: 139: if (pid->automode && pid->direction != direction) {
+"139
 [e $ ! && != -> . *U _pid 12 `i -> -> -> 0 `i `uc `i != -> . *U _pid 13 `i -> _direction `i 549  ]
 {
-[; ;PID.c: 136: pid->Kp = (0 - pid->Kp);
-"136
+[; ;PID.c: 140: pid->Kp = (0 - pid->Kp);
+"140
 [e = . *U _pid 3 - -> -> 0 `i `f . *U _pid 3 ]
-[; ;PID.c: 137: pid->Ki = 0 - pid->Ki;
-"137
+[; ;PID.c: 141: pid->Ki = 0 - pid->Ki;
+"141
 [e = . *U _pid 4 - -> -> 0 `i `f . *U _pid 4 ]
-[; ;PID.c: 138: pid->Kd = 0 - pid->Kd;
-"138
+[; ;PID.c: 142: pid->Kd = 0 - pid->Kd;
+"142
 [e = . *U _pid 5 - -> -> 0 `i `f . *U _pid 5 ]
-"139
+"143
 }
 [e :U 549 ]
-[; ;PID.c: 139: }
-[; ;PID.c: 140: pid->direction = direction;
-"140
+[; ;PID.c: 143: }
+[; ;PID.c: 144: pid->direction = direction;
+"144
 [e = . *U _pid 13 _direction ]
-[; ;PID.c: 141: }
-"141
+[; ;PID.c: 145: }
+"145
 [e :UE 548 ]
 }

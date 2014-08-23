@@ -17,8 +17,9 @@
 	Author website: http://www.geekfactory.mx
 	Author e-mail: ruben at geekfactory dot mx
  */
-#define CONFIG_TIMING_MAIN_CLOCK 12000000
 #include "PID.h"
+
+#define CONFIG_TIMING_MAIN_CLOCK 12000000
 
 pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd)
 {

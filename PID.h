@@ -74,7 +74,8 @@ typedef struct pid_controller * pid_t;
 /**
  * @brief Creates a new PID controller
  *
- * Creates a new pid controller and initializes it´s internal variables.
+ * Creates a new pid controller and initializes it´s input, output and internal
+ * variables. Also we set the tuning parameters
  *
  * @param pid A pointer to a pid_controller structure
  * @param in Pointer to float value for the process input
@@ -88,17 +89,77 @@ typedef struct pid_controller * pid_t;
  */
 pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
 
-
+/**
+ * @brief Computes the output of the PID control
+ *
+ * This function computes the PID output based on the parameters, setpoint and
+ * current system input.
+ *
+ * @param pid The PID controller instance which will be used for computation
+ *
+ * @return returns TRUE if the controller computed a new output or FALSE if the
+ * controller didn´t update the output.
+ */
 uint8_t pid_compute(pid_t pid);
 
+/**
+ * @brief Sets new PID tuning parameters
+ *
+ * Sets the gain for the Proportional (Kp), Integral (Ki) and Derivative (Kd)
+ * terms.
+ *
+ * @param pid The PID controller instance to modify
+ * @param kp Proportional gain
+ * @param ki Integral gain
+ * @param kd Derivative gain
+ */
 void pid_tune(pid_t pid, float kp, float ki, float kd);
 
+/**
+ * @brief Sets the pid algorithm period
+ *
+ * Changes the between PID control loop computations.
+ *
+ * @param pid The PID controller instance to modify
+ * @param time The time in milliseconds between computations
+ */
 void pid_sample(pid_t pid, uint32_t time);
 
+/**
+ * @brief Sets the limits for the PID controller output
+ *
+ * @param pid The PID controller instance to modify
+ * @param min The minimum output value for the PID controller
+ * @param max The maximum output value for the PID controller
+ */
 void pid_limits(pid_t pid, float min, float max);
 
+/**
+ * @brief Enables automatic control using PID
+ *
+ * Enables the PID control loop. If manual output adjustment is needed you can
+ * disable the PID control loop using pid_manual(). This function enables PID
+ * automatic control at program start or after calling pid_manual()
+ *
+ * @param pid The PID controller instance to enable
+ */
+void pid_auto(pid_t pid);
+
+void pid_manual(pid_t pid);
+
+/**
+ * @brief Configures the PID controller direction
+ *
+ * Sets the direction of the PID controller. The direction is "DIRECT" when a
+ * increase of the output will cause a increase on the measured value and
+ * "REVERSE" when a increase on the controller output will cause a decrease on
+ * the measured value.
+ *
+ * @param pid The PID controller instance to modify
+ * @param direction The new direction of the PID controller
+ */
 void pid_direction(pid_t pid, enum enCtrlDirs direction);
 
-void pid_auto(pid_t pid);
+
 #endif
 // End of Header file

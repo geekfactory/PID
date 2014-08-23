@@ -5712,7 +5712,7 @@ extern void _delay3(unsigned char);
 # 18 "../SPI/SPIPort.h"
 typedef char xSPIHandle;
 
-# 62 "../SPI/SPI.h"
+# 58 "../SPI/SPI.h"
 enum enSPIModules {
 E_SPI_1 = 1,
 E_SPI_2 = 2,
@@ -5720,40 +5720,44 @@ E_SPI_3 = 3,
 E_SPI_4 = 4,
 };
 
-# 90
+# 86
 xSPIHandle spi_init(enum enSPIModules eModule);
 
-# 103
+# 99
 uint8_t spi_control(xSPIHandle spid, uint32_t ctrl, uint32_t arg);
 
-# 115
+# 111
 uint8_t spi_open(xSPIHandle spid);
 
-# 127
+# 122
 uint8_t spi_close(xSPIHandle spid);
 
-# 136
+# 131
 void spi_write(xSPIHandle spid, uint8_t data);
 
-# 145
+# 140
 uint8_t spi_read(xSPIHandle spid);
 
-# 154
+# 149
 void spi_write_array(xSPIHandle spid, const uint8_t * txbuf, uint16_t len);
 
-# 163
+# 158
 void spi_read_array(xSPIHandle spid, uint8_t * rxbuf, uint16_t len);
 
-# 173
+# 168
 uint8_t spi_trans(xSPIHandle spid, uint8_t data);
 
-# 183
+# 178
 void spi_trans_array(xSPIHandle spid, uint8_t * txbuf, uint8_t * rxbuf, uint16_t len);
 
-# 6 "io.h"
+# 59 "io.h"
+void io_mode(uint8_t pin, uint8_t mode);
+
+# 70
 void io_write(uint8_t pin, uint8_t value);
 
-void io_mode(uint8_t pin, uint8_t mode);
+# 83
+uint8_t io_read( uint8_t pin );
 
 # 37 "tc.h"
 struct thermocuple_struct
@@ -5779,9 +5783,11 @@ tc_t tc_init(xSPIHandle spid, uint8_t cspin)
 struct thermocuple_struct tcpl;
 
 
-io_write(cspin,1);
+io_write(cspin, 1);
+io_mode(cspin, 0);
 
-spi_control(spid, 0x00000001 | 0x00000020, 4 );
+spi_control(spid, 0x00000001 | 0x00000020, 4);
+spi_open(spid);
 
 tcpl.spi = spid;
 tcpl.cspin = cspin;
@@ -5789,29 +5795,27 @@ tcpl.cspin = cspin;
 return tcpl;
 }
 
-int16_t tc_read( tc_t * tcpl )
+int16_t tc_read(tc_t * tcpl)
 {
 uint16_t buf = 0;
 
 
-io_write( tcpl->cspin, 0 );
+io_write(tcpl->cspin, 0);
 
-spi_read_array(tcpl->spi, (uint8_t *)&buf, 2);
+spi_read_array(tcpl->spi, (uint8_t *) & buf, 2);
 
-io_write( tcpl->cspin, 1 );
+io_write(tcpl->cspin, 1);
 
-if(buf & (1<<2))
+if (buf & (1 << 2))
 return -1;
 
 buf &= 0x7FF8;
 
 buf >>= 3;
-
-return buf/4;
+return buf;
 }
 
-float tc_read_float( tc_t * tcpl )
+float tc_read_float(tc_t * tcpl)
 {
-
-return ((float)tc_read(tcpl))* 0.25;
+return((float) tc_read(tcpl))* 0.25;
 }
