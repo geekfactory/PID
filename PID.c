@@ -1,5 +1,5 @@
 /*	Floating point PID control loop for Microcontrollers
-	Copyright (C) 2014 Jesus Ruben Santa Anna Zamudio.
+	Copyright (C) 2015 Jesus Ruben Santa Anna Zamudio.
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -19,15 +19,16 @@
  */
 #include "PID.h"
 
-#define CONFIG_TIMING_MAIN_CLOCK 12000000
-
 pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd)
 {
 	pid->input = in;
 	pid->output = out;
 	pid->setpoint = set;
-	pid->automode = FALSE;
+	pid->automode = false;
+
 	pid_limits(pid, 0, 255);
+
+	// Set default sample time to 100 ms
 	pid->sampletime = 100 * (TICK_SECOND / 1000);
 
 	pid_direction(pid, E_PID_DIRECT);
@@ -38,40 +39,47 @@ pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float k
 	return pid;
 }
 
-uint8_t pid_compute(pid_t pid)
+bool pid_need_compute(pid_t pid)
+{
+	return(tick_get() - pid->lasttime >= pid->sampletime) ? true : false;
+}
+
+bool pid_compute(pid_t pid)
 {
 	uint32_t now;
 
 	if (!pid->automode)
 		return FALSE;
 	now = tick_get();
-	if (now - pid->lasttime >= pid->sampletime) {
-		float in = *(pid->input);
-		// Compute error
-		float error = (*(pid->setpoint)) - in;
-		// Compute integral
-		pid->iterm += (pid->Ki * error);
-		if (pid->iterm > pid->omax)
-			pid->iterm = pid->omax;
-		else if (pid->iterm < pid->omin)
-			pid->iterm = pid->omin;
-		// Compute differential on input
-		float dinput = in - pid->lastin;
-		// Compute PID output
-		float out = pid->Kp * error + pid->iterm - pid->Kd * dinput;
-		// Apply limit to output value
-		if (out > pid->omax)
-			out = pid->omax;
-		else if (out < pid->omin)
-			out = pid->omin;
-		// Output to pointed variable
-		*(pid->output) = out;
-		// Keep track of some variables for next execution
-		pid->lastin = in;
-		pid->lasttime = now;
-		return TRUE;
-	}
-	return FALSE;
+	// Condition to check if need to compute value (replaces pid_need_compute())
+	// if (now - pid->lasttime >= pid->sampletime) {
+	float in = *(pid->input);
+	// Compute error
+	float error = (*(pid->setpoint)) - in;
+	// Compute integral
+	pid->iterm += (pid->Ki * error);
+	if (pid->iterm > pid->omax)
+		pid->iterm = pid->omax;
+	else if (pid->iterm < pid->omin)
+		pid->iterm = pid->omin;
+	// Compute differential on input
+	float dinput = in - pid->lastin;
+	// Compute PID output
+	float out = pid->Kp * error + pid->iterm - pid->Kd * dinput;
+	// Apply limit to output value
+	if (out > pid->omax)
+		out = pid->omax;
+	else if (out < pid->omin)
+		out = pid->omin;
+	// Output to pointed variable
+	*(pid->output) = out;
+	// Keep track of some variables for next execution
+	pid->lastin = in;
+	pid->lasttime = now;
+	return true;
+	//}
+	// PID not computed, output not updated
+	//return false;
 }
 
 void pid_tune(pid_t pid, float kp, float ki, float kd)
@@ -79,7 +87,7 @@ void pid_tune(pid_t pid, float kp, float ki, float kd)
 	if (kp < 0 || ki < 0 || kd < 0)
 		return;
 	//Compute sample time in seconds
-	float ssec = ((float) pid->sampletime) / TICK_SECOND;
+	float ssec = ((float) pid->sampletime) / ((float) TICK_SECOND);
 
 	pid->Kp = kp;
 	pid->Ki = ki * ssec;
@@ -123,24 +131,29 @@ void pid_limits(pid_t pid, float min, float max)
 
 void pid_auto(pid_t pid)
 {
+	// If going from manual to auto
 	if (!pid->automode) {
-		pid->lastin = *(pid->output);
+		pid->iterm = *(pid->output);
 		pid->lastin = *(pid->input);
 		if (pid->iterm > pid->omax)
 			pid->iterm = pid->omax;
 		else if (pid->iterm < pid->omin)
 			pid->iterm = pid->omin;
-		pid->automode = TRUE;
+		pid->automode = true;
 	}
 }
 
-void pid_direction(pid_t pid, enum enCtrlDirs direction)
+void pid_manual(pid_t pid)
+{
+	pid->automode = false;
+}
+
+void pid_direction(pid_t pid, enum pid_control_directions dir)
 {
 	if (pid->automode && pid->direction != direction) {
 		pid->Kp = (0 - pid->Kp);
-		pid->Ki = 0 - pid->Ki;
-		pid->Kd = 0 - pid->Kd;
+		pid->Ki = (0 - pid->Ki);
+		pid->Kd = (0 - pid->Kd);
 	}
 	pid->direction = direction;
 }
-

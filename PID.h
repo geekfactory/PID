@@ -22,26 +22,30 @@
 /*-------------------------------------------------------------*/
 /*		Includes and dependencies			*/
 /*-------------------------------------------------------------*/
-#include"Tick/Tick.h"
+#include "Tick/Tick.h"
+#include <stdbool.h">
+#include <stdint.h>
 
 /*-------------------------------------------------------------*/
 /*		Macros and definitions				*/
 /*-------------------------------------------------------------*/
-// Define "boolean" values
-#ifndef TRUE
-#define TRUE 1
-#endif
-#ifndef FALSE
-#define FALSE 0
-#endif
+
 /*-------------------------------------------------------------*/
 /*		Typedefs enums & structs			*/
 /*-------------------------------------------------------------*/
-enum enCtrlDirs {
+
+/**
+ * Defines if the controler is direct or reverse
+ */
+enum pid_control_directions {
 	E_PID_DIRECT,
 	E_PID_REVERSE,
 };
 
+/**
+ * Structure that holds PID all the PID controller data, multiple instances are
+ * posible using different structures for each controller
+ */
 struct pid_controller {
 	// Input, output and setpoint
 	float * input; //!< Current Process Value
@@ -62,7 +66,7 @@ struct pid_controller {
 	uint32_t sampletime; //!< Defines the PID sample time
 	// Operation mode
 	uint8_t automode; //!< Defines if the PID controller is enabled or disabled
-	enum enCtrlDirs direction;
+	enum pid_control_directions direction;
 };
 
 typedef struct pid_controller * pid_t;
@@ -70,96 +74,120 @@ typedef struct pid_controller * pid_t;
 /*-------------------------------------------------------------*/
 /*		Function prototypes				*/
 /*-------------------------------------------------------------*/
+#ifdef	__cplusplus
+extern "C" {
+#endif
+	/**
+	 * @brief Creates a new PID controller
+	 *
+	 * Creates a new pid controller and initializes it´s input, output and internal
+	 * variables. Also we set the tuning parameters
+	 *
+	 * @param pid A pointer to a pid_controller structure
+	 * @param in Pointer to float value for the process input
+	 * @param out Poiter to put the controller output value
+	 * @param set Pointer float with the process setpoint value
+	 * @param kp Proportional gain
+	 * @param ki Integral gain
+	 * @param kd Diferential gain
+	 *
+	 * @return returns a pid_t controller handle
+	 */
+	pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
 
-/**
- * @brief Creates a new PID controller
- *
- * Creates a new pid controller and initializes it´s input, output and internal
- * variables. Also we set the tuning parameters
- *
- * @param pid A pointer to a pid_controller structure
- * @param in Pointer to float value for the process input
- * @param out Poiter to put the controller output value
- * @param set Pointer float with the process setpoint value
- * @param kp Proportional gain
- * @param ki Integral gain
- * @param kd Diferential gain
- *
- * @return returns a pid_t controller handle
- */
-pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
+	/**
+	 * @brief Check if PID loop needs to run
+	 *
+	 * Determines if the PID control algorithm should compute a new output value,
+	 * if this returs true, the user should read process feedback (sensors) and
+	 * place the reading in the input variable, then call the pid_compute() function.
+	 *
+         * @return return Return true if PID control algorithm is required to run
+         */
+	bool pid_need_compute(pid_t pid)
 
-/**
- * @brief Computes the output of the PID control
- *
- * This function computes the PID output based on the parameters, setpoint and
- * current system input.
- *
- * @param pid The PID controller instance which will be used for computation
- *
- * @return returns TRUE if the controller computed a new output or FALSE if the
- * controller didn´t update the output.
- */
-uint8_t pid_compute(pid_t pid);
+	/**
+	 * @brief Computes the output of the PID control
+	 *
+	 * This function computes the PID output based on the parameters, setpoint and
+	 * current system input.
+	 *
+	 * @param pid The PID controller instance which will be used for computation
+	 *
+	 * @return returns TRUE if the controller computed a new output or FALSE if the
+	 * controller didn´t update the output.
+	 */
+	uint8_t pid_compute(pid_t pid);
 
-/**
- * @brief Sets new PID tuning parameters
- *
- * Sets the gain for the Proportional (Kp), Integral (Ki) and Derivative (Kd)
- * terms.
- *
- * @param pid The PID controller instance to modify
- * @param kp Proportional gain
- * @param ki Integral gain
- * @param kd Derivative gain
- */
-void pid_tune(pid_t pid, float kp, float ki, float kd);
+	/**
+	 * @brief Sets new PID tuning parameters
+	 *
+	 * Sets the gain for the Proportional (Kp), Integral (Ki) and Derivative (Kd)
+	 * terms.
+	 *
+	 * @param pid The PID controller instance to modify
+	 * @param kp Proportional gain
+	 * @param ki Integral gain
+	 * @param kd Derivative gain
+	 */
+	void pid_tune(pid_t pid, float kp, float ki, float kd);
 
-/**
- * @brief Sets the pid algorithm period
- *
- * Changes the between PID control loop computations.
- *
- * @param pid The PID controller instance to modify
- * @param time The time in milliseconds between computations
- */
-void pid_sample(pid_t pid, uint32_t time);
+	/**
+	 * @brief Sets the pid algorithm period
+	 *
+	 * Changes the between PID control loop computations.
+	 *
+	 * @param pid The PID controller instance to modify
+	 * @param time The time in milliseconds between computations
+	 */
+	void pid_sample(pid_t pid, uint32_t time);
 
-/**
- * @brief Sets the limits for the PID controller output
- *
- * @param pid The PID controller instance to modify
- * @param min The minimum output value for the PID controller
- * @param max The maximum output value for the PID controller
- */
-void pid_limits(pid_t pid, float min, float max);
+	/**
+	 * @brief Sets the limits for the PID controller output
+	 *
+	 * @param pid The PID controller instance to modify
+	 * @param min The minimum output value for the PID controller
+	 * @param max The maximum output value for the PID controller
+	 */
+	void pid_limits(pid_t pid, float min, float max);
 
-/**
- * @brief Enables automatic control using PID
- *
- * Enables the PID control loop. If manual output adjustment is needed you can
- * disable the PID control loop using pid_manual(). This function enables PID
- * automatic control at program start or after calling pid_manual()
- *
- * @param pid The PID controller instance to enable
- */
-void pid_auto(pid_t pid);
+	/**
+	 * @brief Enables automatic control using PID
+	 *
+	 * Enables the PID control loop. If manual output adjustment is needed you can
+	 * disable the PID control loop using pid_manual(). This function enables PID
+	 * automatic control at program start or after calling pid_manual()
+	 *
+	 * @param pid The PID controller instance to enable
+	 */
+	void pid_auto(pid_t pid);
 
-void pid_manual(pid_t pid);
+	/**
+	 * @brief Disables automatic process control
+	 *
+	 * Disables the PID control loop. User can modify the value of the output
+	 * variable and the controller will not overwrite it.
+	 *
+	 * @param pid The PID controller instance to disable
+	 */
+	void pid_manual(pid_t pid);
 
-/**
- * @brief Configures the PID controller direction
- *
- * Sets the direction of the PID controller. The direction is "DIRECT" when a
- * increase of the output will cause a increase on the measured value and
- * "REVERSE" when a increase on the controller output will cause a decrease on
- * the measured value.
- *
- * @param pid The PID controller instance to modify
- * @param direction The new direction of the PID controller
- */
-void pid_direction(pid_t pid, enum enCtrlDirs direction);
+	/**
+	 * @brief Configures the PID controller direction
+	 *
+	 * Sets the direction of the PID controller. The direction is "DIRECT" when a
+	 * increase of the output will cause a increase on the measured value and
+	 * "REVERSE" when a increase on the controller output will cause a decrease on
+	 * the measured value.
+	 *
+	 * @param pid The PID controller instance to modify
+	 * @param direction The new direction of the PID controller
+	 */
+	void pid_direction(pid_t pid, enum pid_control_directions dir);rection
 
+#ifdef	__cplusplus
+}
+#endif
 
 #endif
 // End of Header file
