@@ -72,7 +72,7 @@ bool pid_compute(pid_t pid)
 	else if (out < pid->omin)
 		out = pid->omin;
 	// Output to pointed variable
-	*(pid->output) = out;
+	(*pid->output) = out;
 	// Keep track of some variables for next execution
 	pid->lastin = in;
 	pid->lasttime = now;
@@ -150,10 +150,10 @@ void pid_manual(pid_t pid)
 
 void pid_direction(pid_t pid, enum pid_control_directions dir)
 {
-	if (pid->automode && pid->direction != direction) {
+	if (pid->automode && pid->direction != dir) {
 		pid->Kp = (0 - pid->Kp);
 		pid->Ki = (0 - pid->Ki);
 		pid->Kd = (0 - pid->Kd);
 	}
-	pid->direction = direction;
+	pid->direction = dir;
 }

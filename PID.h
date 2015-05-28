@@ -23,7 +23,7 @@
 /*		Includes and dependencies			*/
 /*-------------------------------------------------------------*/
 #include "Tick/Tick.h"
-#include <stdbool.h">
+#include <stdbool.h>
 #include <stdint.h>
 
 /*-------------------------------------------------------------*/
@@ -102,8 +102,8 @@ extern "C" {
 	 * if this returs true, the user should read process feedback (sensors) and
 	 * place the reading in the input variable, then call the pid_compute() function.
 	 *
-         * @return return Return true if PID control algorithm is required to run
-         */
+	 * @return return Return true if PID control algorithm is required to run
+	 */
 	bool pid_need_compute(pid_t pid);
 
 	/**
