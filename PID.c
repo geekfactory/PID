@@ -49,7 +49,7 @@ bool pid_compute(pid_t pid)
 	uint32_t now;
 
 	if (!pid->automode)
-		return FALSE;
+		return false;
 	now = tick_get();
 	// Condition to check if need to compute value (replaces pid_need_compute())
 	// if (now - pid->lasttime >= pid->sampletime) {

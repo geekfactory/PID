@@ -104,7 +104,7 @@ extern "C" {
 	 *
          * @return return Return true if PID control algorithm is required to run
          */
-	bool pid_need_compute(pid_t pid)
+	bool pid_need_compute(pid_t pid);
 
 	/**
 	 * @brief Computes the output of the PID control
@@ -117,7 +117,7 @@ extern "C" {
 	 * @return returns TRUE if the controller computed a new output or FALSE if the
 	 * controller didn´t update the output.
 	 */
-	uint8_t pid_compute(pid_t pid);
+	bool pid_compute(pid_t pid);
 
 	/**
 	 * @brief Sets new PID tuning parameters
@@ -183,7 +183,7 @@ extern "C" {
 	 * @param pid The PID controller instance to modify
 	 * @param direction The new direction of the PID controller
 	 */
-	void pid_direction(pid_t pid, enum pid_control_directions dir);rection
+	void pid_direction(pid_t pid, enum pid_control_directions dir);
 
 #ifdef	__cplusplus
 }
