@@ -7,7 +7,7 @@ PID control library implemented in floating point arithmetic, it is designed to 
 
 The main advantage of this PID library is that it can be compiled on a wide range of devices, due to the fact that this library does not require a C++ compiler and can be linked with our other libraries for maximum portability to other platforms.
 
-Usage
+Library Usage
 ====
 
 The following code depicts the library basic usage, input and output functions should be provided by end user.
