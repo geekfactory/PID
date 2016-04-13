@@ -80,7 +80,7 @@ extern "C" {
 	/**
 	 * @brief Creates a new PID controller
 	 *
-	 * Creates a new pid controller and initializes it´s input, output and internal
+	 * Creates a new pid controller and initializes itï¿½s input, output and internal
 	 * variables. Also we set the tuning parameters
 	 *
 	 * @param pid A pointer to a pid_controller structure
@@ -113,11 +113,8 @@ extern "C" {
 	 * current system input.
 	 *
 	 * @param pid The PID controller instance which will be used for computation
-	 *
-	 * @return returns TRUE if the controller computed a new output or FALSE if the
-	 * controller didn´t update the output.
 	 */
-	bool pid_compute(pid_t pid);
+	void pid_compute(pid_t pid);
 
 	/**
 	 * @brief Sets new PID tuning parameters

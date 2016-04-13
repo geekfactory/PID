@@ -41,18 +41,16 @@ pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float k
 
 bool pid_need_compute(pid_t pid)
 {
+	// Check if the PID period has elapsed
 	return(tick_get() - pid->lasttime >= pid->sampletime) ? true : false;
 }
 
-bool pid_compute(pid_t pid)
+void pid_compute(pid_t pid)
 {
-	uint32_t now;
-
+	// Check if control is enabled
 	if (!pid->automode)
 		return false;
-	now = tick_get();
-	// Condition to check if need to compute value (replaces pid_need_compute())
-	// if (now - pid->lasttime >= pid->sampletime) {
+	
 	float in = *(pid->input);
 	// Compute error
 	float error = (*(pid->setpoint)) - in;
@@ -75,17 +73,15 @@ bool pid_compute(pid_t pid)
 	(*pid->output) = out;
 	// Keep track of some variables for next execution
 	pid->lastin = in;
-	pid->lasttime = now;
-	return true;
-	//}
-	// PID not computed, output not updated
-	//return false;
+	pid->lasttime = tick_get();;
 }
 
 void pid_tune(pid_t pid, float kp, float ki, float kd)
 {
+	// Check for validity
 	if (kp < 0 || ki < 0 || kd < 0)
 		return;
+	
 	//Compute sample time in seconds
 	float ssec = ((float) pid->sampletime) / ((float) TICK_SECOND);
 
@@ -106,7 +102,7 @@ void pid_sample(pid_t pid, uint32_t time)
 		float ratio = (float) (time * (TICK_SECOND / 1000)) / (float) pid->sampletime;
 		pid->Ki *= ratio;
 		pid->Kd /= ratio;
-		pid->sampletime = (uint32_t) (time * (TICK_SECOND / 1000));
+		pid->sampletime = time * (TICK_SECOND / 1000);
 	}
 }
 
