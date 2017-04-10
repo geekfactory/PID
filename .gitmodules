@@ -1,6 +1,0 @@
-[submodule "Tick"]
-	path = Tick
-	url = https://github.com/geekfactory/Tick.git
-[submodule "SPI"]
-	path = SPI
-	url = https://github.com/geekfactory/SPI.git

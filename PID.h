@@ -19,24 +19,12 @@
  */
 #ifndef PID_H
 #define PID_H
-/*-------------------------------------------------------------*/
-/*		Includes and dependencies			*/
-/*-------------------------------------------------------------*/
-#include "Tick/Tick.h"
+
+#include "PID_Types.h"
+
 #include <stdbool.h>
 #include <stdint.h>
 
-/*-------------------------------------------------------------*/
-/*		Macros and definitions				*/
-/*-------------------------------------------------------------*/
-
-/*-------------------------------------------------------------*/
-/*		Typedefs enums & structs			*/
-/*-------------------------------------------------------------*/
-
-/**
- * Defines if the controler is direct or reverse
- */
 enum pid_control_directions {
 	E_PID_DIRECT,
 	E_PID_REVERSE,
@@ -47,36 +35,35 @@ enum pid_control_directions {
  * posible using different structures for each controller
  */
 struct pid_controller {
-	// Input, output and setpoint
-	float * input; //!< Current Process Value
-	float * output; //!< Corrective Output from PID Controller
-	float * setpoint; //!< Controller Setpoint
-	// Tuning parameters
-	float Kp; //!< Stores the gain for the Proportional term
-	float Ki; //!< Stores the gain for the Integral term
-	float Kd; //!< Stores the gain for the Derivative term
-	// Output minimum and maximum values
-	float omin; //!< Maximum value allowed at the output
-	float omax; //!< Minimum value allowed at the output
-	// Variables for PID algorithm
-	float iterm; //!< Accumulator for integral term
-	float lastin; //!< Last input value for differential term
-	// Time related
-	uint32_t lasttime; //!< Stores the time when the control loop ran last time
-	uint32_t sampletime; //!< Defines the PID sample time
-	// Operation mode
-	uint8_t automode; //!< Defines if the PID controller is enabled or disabled
+	/*  Input, output and setpoint */
+	float * input; /*  Current Process Value */
+	float * output; /*  Corrective Output from PID Controller */
+	float * setpoint; /*  Controller Setpoint */
+	/*  Tuning parameters */
+	float Kp; /*  Stores the gain for the Proportional term */
+	float Ki; /*  Stores the gain for the Integral term */
+	float Kd; /*  Stores the gain for the Derivative term */
+	/*  Output minimum and maximum values */
+	float omin; /*  Maximum value allowed at the output */
+	float omax; /*  Minimum value allowed at the output */
+	/*  Variables for PID algorithm */
+	float iterm; /*  Accumulator for integral term */
+	float lastin; /*  Last input value for differential term */
+	/*  Time related */
+        pid_ticks_t tickspersecond;
+	pid_ticks_t lasttime; /*  Stores the time when the control loop ran last time */
+	pid_ticks_t sampletime; /*  Defines the PID sample time */
+        void* ticksUser; /* data passed to time query functions */
+	/*  Operation mode */
+	bool automode; /*  Defines if the PID controller is enabled or disabled */
 	enum pid_control_directions direction;
 };
 
 typedef struct pid_controller * pid_t;
 
-/*-------------------------------------------------------------*/
-/*		Function prototypes				*/
-/*-------------------------------------------------------------*/
 #ifdef	__cplusplus
 extern "C" {
-#endif
+#endif /* __cplusplus */
 	/**
 	 * @brief Creates a new PID controller
 	 *
@@ -93,7 +80,9 @@ extern "C" {
 	 *
 	 * @return returns a pid_t controller handle
 	 */
-	pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd);
+	pid_t pid_create(pid_t pid, float* in, float* out, float* set, float kp, float ki, float kd,
+                void* ticksUser
+                );
 
 	/**
 	 * @brief Check if PID loop needs to run
@@ -184,7 +173,6 @@ extern "C" {
 
 #ifdef	__cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
-#endif
-// End of Header file
+#endif /* PID_H */
